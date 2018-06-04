@@ -1,0 +1,60 @@
+.appbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  background: #808080;
+  padding: 12px 24px;
+}
+
+.logo {
+  width: 3rem;
+  height: 3rem;
+  margin-left: 0;
+}
+
+.brand {
+  display: none;
+  font-size: 3rem;
+  color: white;
+  padding: 12px;
+}
+
+.add-task-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+@media screen and (min-width: 430px) {
+  .brand {
+    display: inline-block;
+  }
+  .add-task-wrapper {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.task-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.task-title {
+  display: inline-block;
+  margin: 0;
+}
+
+.buttons-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.buttons-wrapper>button {
+  margin: 0 0.5rem;
+}
