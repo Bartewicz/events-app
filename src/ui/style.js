@@ -8,11 +8,11 @@ export default {
   },
   mediumIcon: {
     color: 'white',
-    width: 48,
-    height: 48
+    width: 24,
+    height: 24
   },
   medium: {
-    width: 72,
-    height: 72
+    width: 36,
+    height: 48
   }
 }

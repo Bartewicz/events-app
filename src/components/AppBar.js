@@ -10,7 +10,7 @@ export default (props) => (
     <div>
       <img className={'logo'} src={logo} alt={'Logo'} />
       <span className={'brand'}>
-        EVE.nt
+        Eve.nt | Make it happen!
       </span>
     </div>
         <IconButton
