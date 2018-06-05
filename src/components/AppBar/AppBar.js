@@ -9,7 +9,10 @@ export default (props) => (
     <div>
       <img className={'logo'} src={logo} alt={'Logo'} />
       <span className={'brand'}>
-        Eve.nt | Make it happen!
+        Eve.nt
+      </span>
+      <span className={'brandFollower'}>
+         | Make it happen!
       </span>
     </div>
         <DropDownMenu />

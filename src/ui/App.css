@@ -14,11 +14,14 @@
   margin-left: 0;
 }
 
-.brand {
-  display: none;
+.brand, .brandFollower {
   font-size: 1.5rem;
   color: white;
   padding: 6px;
+}
+
+.brandFollower {
+  display: none;
 }
 
 .add-task-wrapper {
@@ -29,7 +32,7 @@
 }
 
 @media screen and (min-width: 430px) {
-  .brand {
+  .brandFollower {
     display: inline-block;
   }
   .add-task-wrapper {
