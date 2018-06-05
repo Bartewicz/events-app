@@ -4,6 +4,7 @@ import AppBar from './components/AppBar'
 // UI
 import './ui/App.css'
 import style from './ui/style'
+import BottomNavigation from './components/BottomNavigation';
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
         <h1>
           Hello, World!
         </h1>
+        <BottomNavigation />
       </div>
     )
   }
