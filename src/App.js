@@ -5,15 +5,17 @@ import AppBar from './components/AppBar'
 import './ui/App.css'
 import style from './ui/style'
 import BottomNavigation from './components/BottomNavigation';
+import CreateEvent from './components/CreateEvent/CreateEvent';
 
 class App extends Component {
   render() {
     return (
-      <div style={style.centered}>
+      <div>
         <AppBar />
-        <h1>
+        <h1 style={style.centered}>
           Hello, World!
         </h1>
+        <CreateEvent />
         <BottomNavigation />
       </div>
     )
