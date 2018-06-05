@@ -1,7 +1,14 @@
 export default {
-  default: {
+  defaultMargins: {
     margin: '20px',
     padding: '20px'
+  },
+  fixedBottom: {
+    position: 'fixed',
+    bottom: '0',
+    width: '100%',
+    boxSizing: 'border-box',
+    borderTop: '1px solid lightgray'
   },
   centered: {
     textAlign: 'center'
