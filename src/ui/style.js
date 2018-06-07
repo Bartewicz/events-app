@@ -21,5 +21,10 @@ export default {
   medium: {
     width: 36,
     height: 48
+  },
+  wrapper: {
+    maxWidth: '300px',
+    margin: '0 auto',
+    textAlign: 'center'
   }
 }

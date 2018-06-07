@@ -8,7 +8,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 ReactDOM.render(
   <MuiThemeProvider>
-    <App />
+    <Auth>
+      <App />
+    </Auth>
   </MuiThemeProvider>
   , document.getElementById('root'))
 registerServiceWorker()
