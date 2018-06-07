@@ -1,3 +1,36 @@
+/* General styles */
+
+.text-center {
+  text-align: center;
+}
+
+.wrapper {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.buttons-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.button-margins {
+  margin: 0.5rem 0;
+}
+
+.link {
+  text-decoration: none;
+}
+
+/* PaperRefined */
+
+.paper {
+  margin: 0px;
+  padding: 20px;
+}
+
+/* <-- AppBar --> */
+
 .appbar {
   display: flex;
   justify-content: space-between;
@@ -14,17 +47,51 @@
   margin-left: 0;
 }
 
-.brand, .brandFollower {
+.brand, .brand-follower {
   font-size: 1.5rem;
   color: white;
   padding: 6px;
 }
 
-.brandFollower {
+.brand-follower {
   display: none;
 }
 
-.add-task-wrapper {
+@media screen and (min-width: 430px) {
+  .brand-follower {
+    display: inline-block;
+  }
+}
+
+/* BottomNavigation */
+
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+  border-top: 1px solid lightgray;
+}
+
+.medium-icon {
+  color: white;
+  width: 24;
+  height: 24;
+}
+
+.medium {
+  width: 36;
+  height: 48;
+}
+
+/* <-- CreateEvent --> */
+
+.event-title {
+  display: inline-block;
+  margin: 0;
+}
+
+.add-event-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,32 +99,27 @@
 }
 
 @media screen and (min-width: 430px) {
-  .brandFollower {
-    display: inline-block;
-  }
-  .add-task-wrapper {
+  .add-event-wrapper {
     flex-direction: row;
     justify-content: space-between;
   }
 }
 
-.task-wrapper {
+/* <-- Dashboard --> */
+
+.event-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
 }
 
-.task-title {
-  display: inline-block;
-  margin: 0;
-}
+/* <-- Auth --> */
 
-.buttons-wrapper {
-  display: flex;
-  justify-content: center;
-}
-
-.buttons-wrapper>button {
-  margin: 0 0.5rem;
+.auth-label {
+  cursor: pointer;
+  display: block;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
 }
