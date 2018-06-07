@@ -1,11 +1,13 @@
 import React from 'react'
+// UI
 import { RaisedButton } from 'material-ui'
 
 const LogInByGoogle = (props) => (
   <RaisedButton
+  className={'button-margins'}
     label={'Log in by Google!'}
-    secondary={true}
     onClick={props.onLogInClick}
+    secondary={true}
   />
 )
 

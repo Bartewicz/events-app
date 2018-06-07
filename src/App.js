@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import AppBar from './components/AppBar'
 // UI
 import './ui/App.css'
-import style from './ui/style'
 import BottomNavigation from './components/BottomNavigation';
 import CreateEvent from './components/CreateEvent/CreateEvent';
 
@@ -12,7 +11,7 @@ class App extends Component {
     return (
       <div>
         <AppBar />
-        <h1 style={style.centered}>
+        <h1 className={'text-center'}>
           Hello, World!
         </h1>
         <CreateEvent />
