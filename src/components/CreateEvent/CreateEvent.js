@@ -1,6 +1,8 @@
 import React from 'react'
 // React-Redux
 import { connect } from 'react-redux'
+// Components
+import MapContainer from '../MapContainer/MapContainer'
 // Material-ui
 import PaperRefined from '../../ui/PaperRefined'
 import { TextField, RaisedButton } from 'material-ui'
@@ -37,8 +39,8 @@ const CreateEvent = (props) => (
           />
         </div>
       </div>
-      <div className={'map-margins'}>
-        <img src="http://via.placeholder.com/350x250" />
+      <div className={'map-wrapper'}>
+        <MapContainer />
       </div>
       <RaisedButton
         className={'button-margins'}
