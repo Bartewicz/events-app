@@ -8,7 +8,8 @@ import { TextField, RaisedButton } from 'material-ui'
 import { addEventToFirebase, onNewHeaderChange, onNewDescChange } from './reducer'
 
 const CreateEvent = (props) => (
-    <PaperRefined>
+  <PaperRefined>
+    <div className={'wrapper'}>
       <h2>Create new event</h2>
       <div className={'event-title'}>
         <span>Title:&nbsp;</span>
@@ -39,8 +40,9 @@ const CreateEvent = (props) => (
           primary={true}
         />
       </div>
-    </PaperRefined>
-  )
+    </div>
+  </PaperRefined>
+)
 
 export default connect(
   state => ({

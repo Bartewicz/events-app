@@ -12,7 +12,7 @@ const loggedOut = () => ({ type: LOGGED_OUT })
 
 // INITIAL STATE
 const initialState = {
-  isLoggedIn: false,
+  isUserLoggedIn: false,
   user: null
 }
 
@@ -22,13 +22,13 @@ export default (state = initialState, action) => {
     case LOGGED_IN:
       return {
         ...state,
-        isLoggedIn: true,
+        isUserLoggedIn: true,
         user: action.user
       }
     case LOGGED_OUT:
       return {
         ...state,
-        isLoggedIn: false,
+        isUserLoggedIn: false,
         user: null
       }
     default:
@@ -49,7 +49,7 @@ export const initAuthUserSync = () => (dispatch, getState) => {
         dispatch(handleSuccess('You were logged out :) See you next time!'))
       }
     }
-  ).catch(error => dispatch(handleExternalError(error)))
+  )
 }
 
 export const logInByGoogle = () => (dispatch, getState) => {
