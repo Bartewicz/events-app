@@ -8,13 +8,14 @@ import { TextField, RaisedButton } from 'material-ui'
 import { addEventToFirebase, onNewHeaderChange, onNewDescChange } from './reducer'
 
 const CreateEvent = (props) => (
-  <PaperRefined>
+  <div className={'events-wrapper'}>
     <div className={'wrapper'}>
       <h2>Create new event</h2>
-      <div className={'event-title'}>
-        <span>Title:&nbsp;</span>
+      <div>
+        <span>Title:</span>
         <br />
         <TextField
+          fullWidth={true}
           hintText={'Type a title of your event here'}
           name={'new-event'}
           onChange={props.onNewHeaderChange}
@@ -22,26 +23,23 @@ const CreateEvent = (props) => (
         />
       </div>
       <hr />
-      <div className={'add-event-wrapper'}>
-        <div>
-          <span>Description:&nbsp;</span>
-          <br />
-          <TextField
-            hintText={'Type a description here'}
-            multiLine={true}
-            name={'new-event'}
-            onChange={props.onNewDescChange}
-            value={props.newEventDescription}
-          />
-        </div>
-        <RaisedButton
-          label={<b>CREATE</b>}
-          onClick={props.onEventAdd}
-          primary={true}
+      <div>
+        <span>Description:</span>
+        <br />
+        <TextField
+          fullWidth={true}
+          hintText={'Type a description here'}
+          multiLine={true}
+          name={'new-event'}
+          onChange={props.onNewDescChange}
+          value={props.newEventDescription}
         />
       </div>
     </div>
-  </PaperRefined>
+    <div className={'map-margins'}>
+      <img src="http://via.placeholder.com/350x250" />
+    </div>
+  </div>
 )
 
 export default connect(

@@ -4,9 +4,17 @@
   text-align: center;
 }
 
+.link {
+  text-decoration: none;
+}
+
 .wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
   max-width: 400px;
-  margin: 0 auto;
+  min-width: 300px;
+  margin: 10px;
 }
 
 .buttons-wrapper {
@@ -18,8 +26,8 @@
   margin: 0.5rem 0;
 }
 
-.link {
-  text-decoration: none;
+.map-margins {
+  margin: 10px;
 }
 
 /* PaperRefined */
@@ -107,10 +115,10 @@
 
 /* <-- Dashboard --> */
 
-.event-wrapper {
+.events-wrapper {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-flow: row wrap;
+  justify-content: space-around;
   align-items: flex-start;
 }
 
