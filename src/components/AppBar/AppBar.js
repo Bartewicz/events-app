@@ -17,7 +17,7 @@ const AppBar = (props) => (
       </span>
     </div>
     {
-      props.isLoggedIn ?
+      props.isUserLoggedIn ?
         <Nav />
         :
         null
@@ -27,7 +27,7 @@ const AppBar = (props) => (
 
 export default connect(
   state => ({
-    isUserLoggedIn: state.auth.isLoggedIn
+    isUserLoggedIn: state.auth.isUserLoggedIn
   }),
   dispatch => ({
   })

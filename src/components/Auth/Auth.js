@@ -13,7 +13,7 @@ import LogInByMailAndPass from './LogInByMailAndPass'
 
 class Auth extends React.Component {
   state = {
-    isRestorePasswordOpen: true,
+    isRestorePasswordOpen: false,
     isSingUpOpen: false
   }
 
@@ -85,7 +85,7 @@ class Auth extends React.Component {
 
 export default connect(
   state => ({
-    isUserLoggedIn: state.auth.isLoggedIn
+    isUserLoggedIn: state.auth.isUserLoggedIn
   }),
   dispatch => ({
     logInByGoogle: () => dispatch(logInByGoogle()),

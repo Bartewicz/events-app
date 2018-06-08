@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
+// Redux
+import { connect } from 'react-redux'
+import { clearError } from './components/Alerts/reducer'
 // Components
 import AppBar from './components/AppBar'
+import Snackbar from 'material-ui/Snackbar'
 // UI
 import './ui/App.css'
-import BottomNavigation from './components/BottomNavigation';
-import CreateEvent from './components/CreateEvent/CreateEvent';
+import BottomNavigation from './components/BottomNavigation'
+import CreateEvent from './components/CreateEvent/CreateEvent'
 
 class App extends Component {
   render() {
@@ -15,10 +19,25 @@ class App extends Component {
           Hello, World!
         </h1>
         <CreateEvent />
+        <Snackbar
+          autoHideDuration={4000}
+          open={this.props.imWithAlert}
+          message={this.props.alert}
+          bodyStyle={{ backgroundColor: "gray", textAlign: 'center' }}
+          onRequestClose={this.props.clearError}
+        />
         <BottomNavigation />
       </div>
     )
   }
 }
 
-export default App
+export default connect(
+  state => ({
+    imWithAlert: state.alerts.imWithAlert,
+    alert: state.alerts.alert
+  }),
+  dispatch => ({
+    clearError: () => dispatch(clearError())
+  })
+)(App)
