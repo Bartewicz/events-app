@@ -1,4 +1,5 @@
 import { database } from '../../firebase'
+import { handleSuccess, handleInternalError, handleExternalError } from '../Alerts/reducer'
 
 // Actions types
 const CREATE_EVENT = 'createEvent/CREATE_EVENT'
@@ -6,7 +7,7 @@ const NEW_HEADER_CHANGE = 'createEvent/NEW_HEADER_CHANGE'
 const NEW_DESC_CHANGE = 'createEvent/NEW_DESC_CHANGE'
 
 // Actions creators
-const addEvent = () => ({ type: CREATE_EVENT })
+const createEvent = () => ({ type: CREATE_EVENT })
 export const onNewHeaderChange = (value) => ({ type: NEW_HEADER_CHANGE, value })
 export const onNewDescChange = (value) => ({ type: NEW_DESC_CHANGE, value })
 
@@ -49,6 +50,12 @@ export const addEventToFirebase = () => (dispatch, getState) => {
     }
     database.ref(`/events/${newEventKey}`)
       .set(newEvent)
-      .then(() => dispatch(addEvent()))
-  } else { }
+      .then(() => dispatch(createEvent()))
+      .then(() => dispatch(handleSuccess('Great! Your event was succesfully created!')))
+      .catch(error => dispatch(handleExternalError(error)))
+  } else if (!getState().createEvent.newEventHeader) {
+    () => dispatch(handleInternalError('You need to add a title!'))
+  } else if (!getState().createEvent.newEventDescription) {
+    () => dispatch(handleInternalError("You need to add a description!"))
+  }
 }
