@@ -8,38 +8,46 @@ import { TextField, RaisedButton } from 'material-ui'
 import { addEventToFirebase, onNewHeaderChange, onNewDescChange } from './reducer'
 
 const CreateEvent = (props) => (
-  <div className={'events-wrapper'}>
-    <div className={'wrapper'}>
-      <h2>Create new event</h2>
-      <div>
-        <span>Title:</span>
-        <br />
-        <TextField
-          fullWidth={true}
-          hintText={'Type a title of your event here'}
-          name={'new-event'}
-          onChange={props.onNewHeaderChange}
-          value={props.newEventHeader}
-        />
+  <PaperRefined>
+    <div className={'events-wrapper'}>
+      <div className={'wrapper'}>
+        <h2>Create new event</h2>
+        <div>
+          <span>Title:</span>
+          <br />
+          <TextField
+            fullWidth={true}
+            hintText={'Type a title of your event here'}
+            name={'new-event'}
+            onChange={props.onNewHeaderChange}
+            value={props.newEventHeader}
+          />
+        </div>
+        <hr />
+        <div>
+          <span>Description:</span>
+          <br />
+          <TextField
+            fullWidth={true}
+            hintText={'Type a description here'}
+            multiLine={true}
+            name={'new-event'}
+            onChange={props.onNewDescChange}
+            value={props.newEventDescription}
+          />
+        </div>
       </div>
-      <hr />
-      <div>
-        <span>Description:</span>
-        <br />
-        <TextField
-          fullWidth={true}
-          hintText={'Type a description here'}
-          multiLine={true}
-          name={'new-event'}
-          onChange={props.onNewDescChange}
-          value={props.newEventDescription}
-        />
+      <div className={'map-margins'}>
+        <img src="http://via.placeholder.com/350x250" />
       </div>
+      <RaisedButton
+        className={'button-margins'}
+        fullWidth={true}
+        label={<b>Let's make it happen!</b>}
+        primary={true}
+      />
     </div>
-    <div className={'map-margins'}>
-      <img src="http://via.placeholder.com/350x250" />
-    </div>
-  </div>
+  </PaperRefined>
 )
 
 export default connect(
