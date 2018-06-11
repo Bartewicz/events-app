@@ -2,7 +2,7 @@ import React from 'react'
 // React-Redux
 import { connect } from 'react-redux'
 // Components
-import MapContainer from '../MapContainer/MapContainer'
+import Map from '../Map/Map'
 // Material-ui
 import PaperRefined from '../../ui/PaperRefined'
 import { TextField, RaisedButton } from 'material-ui'
@@ -39,8 +39,8 @@ const CreateEvent = (props) => (
           />
         </div>
       </div>
-      <div className={'map-wrapper'}>
-        <MapContainer />
+      <div id={'map-wrapper'} className={'map-wrapper'}>
+        <Map />
       </div>
       <RaisedButton
         className={'button-margins'}
