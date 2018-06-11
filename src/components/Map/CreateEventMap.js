@@ -11,22 +11,21 @@ class Map extends React.Component {
   }
 
   render() {
-    console.log('markers', this.props.markers)
     return (
       <div>
         <GoogleMap
           center={this.state.defaultCenter}
           defaultZoom={12}
+          onClick={this.props.handleClick}
         >
-        {
-          this.props.markers.map((el, i) => (
-            <Marker
-            key={i}
-            position={el.position}
-            />
-          )
-        )
-        }
+          {
+            this.props.isMarkerShown ?
+              <Marker
+                position={this.props.markerPosition}
+              />
+              :
+              null
+          }
         </GoogleMap>
       </div>
     )
@@ -35,7 +34,7 @@ class Map extends React.Component {
 
 export default compose(
   withProps({
-    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyDLJXIYnOaSmYK2OT91_Vsn-mWT4bGufJ0&libraries=geometry,drawing,places",
+    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyDLJXIYnOaSmYK2OT91_Vsn-mWT4bGufJ0",
     containerElement: <div style={{ width: '100%', height: '100%' }} />,
     loadingElement: <div>Loading resources...</div>,
     mapElement: <div style={{ width: '100%', height: '100%' }} />,
