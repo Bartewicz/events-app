@@ -54,8 +54,10 @@ export const addEventToFirebase = () => (dispatch, getState) => {
       .then(() => dispatch(handleSuccess('Great! Your event was succesfully created!')))
       .catch(error => dispatch(handleExternalError(error)))
   } else if (!getState().createEvent.newEventHeader) {
-    () => dispatch(handleInternalError('You need to add a title!'))
+    dispatch(handleInternalError('You need to add a title!'))
   } else if (!getState().createEvent.newEventDescription) {
-    () => dispatch(handleInternalError("You need to add a description!"))
+    dispatch(handleInternalError("You need to add a description!"))
+  } else {
+    dispatch(handleInternalError('Something went wrong'))
   }
 }

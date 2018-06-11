@@ -62,6 +62,7 @@ class CreateEvent extends React.Component {
             className={'button-margins'}
             fullWidth={true}
             label={<b>Let's make it happen!</b>}
+            onClick={this.props.onEventAdd}
             primary={true}
           />
         </div>
