@@ -2,7 +2,7 @@ import React from 'react'
 // React-Redux
 import { connect } from 'react-redux'
 // Components
-import Map from '../Map/Map'
+import Map from '../Map/CreateEventMap'
 // Material-ui
 import PaperRefined from '../../ui/PaperRefined'
 import { TextField, RaisedButton } from 'material-ui'
@@ -40,7 +40,16 @@ const CreateEvent = (props) => (
         </div>
       </div>
       <div id={'map-wrapper'} className={'map-wrapper'}>
-        <Map />
+        <Map
+          markers={
+            [{
+              position: {
+                lat: 53.421676,
+                lng: 14.530781
+              }
+            }]
+          }
+        />
       </div>
       <RaisedButton
         className={'button-margins'}
