@@ -1,54 +1,75 @@
 import React from 'react'
 // React-Redux
 import { connect } from 'react-redux'
+// Components
+import Map from '../Map/CreateEventMap'
 // Material-ui
 import PaperRefined from '../../ui/PaperRefined'
 import { TextField, RaisedButton } from 'material-ui'
 // Reducer
 import { addEventToFirebase, onNewHeaderChange, onNewDescChange } from './reducer'
 
-const CreateEvent = (props) => (
-  <PaperRefined>
-    <div className={'events-wrapper'}>
-      <div className={'wrapper'}>
-        <h2>Create new event</h2>
-        <div>
-          <span>Title:</span>
-          <br />
-          <TextField
+class CreateEvent extends React.Component {
+  state = {
+    isMarkerShown: false,
+    markerPosition: {}
+  }
+
+  handleClick = (event) => {
+    let markerPosition = { lat: event.latLng.lat(), lng: event.latLng.lng() }
+    this.setState({ isMarkerShown: true, markerPosition })
+  }
+
+  render() {
+    return (
+      <PaperRefined>
+        <div className={'events-wrapper'}>
+          <div className={'wrapper'}>
+            <h2>Create new event</h2>
+            <div>
+              <span>Title:</span>
+              <br />
+              <TextField
+                fullWidth={true}
+                hintText={'Type a title of your event here'}
+                name={'new-event'}
+                onChange={this.props.onNewHeaderChange}
+                value={this.props.newEventHeader}
+              />
+            </div>
+            <hr />
+            <div>
+              <span>Description:</span>
+              <br />
+              <TextField
+                fullWidth={true}
+                hintText={'Type a description here'}
+                multiLine={true}
+                name={'new-event'}
+                onChange={this.props.onNewDescChange}
+                value={this.props.newEventDescription}
+              />
+            </div>
+          </div>
+          <div id={'map-wrapper'} className={'map-wrapper'}>
+            <Map
+              isMarkerShown={this.state.isMarkerShown}
+              handleClick={this.handleClick}
+              markerPosition={this.state.markerPosition}
+            />
+          </div>
+          <RaisedButton
+            className={'button-margins'}
             fullWidth={true}
-            hintText={'Type a title of your event here'}
-            name={'new-event'}
-            onChange={props.onNewHeaderChange}
-            value={props.newEventHeader}
+            label={<b>Let's make it happen!</b>}
+            onClick={this.props.onEventAdd}
+            primary={true}
           />
         </div>
-        <hr />
-        <div>
-          <span>Description:</span>
-          <br />
-          <TextField
-            fullWidth={true}
-            hintText={'Type a description here'}
-            multiLine={true}
-            name={'new-event'}
-            onChange={props.onNewDescChange}
-            value={props.newEventDescription}
-          />
-        </div>
-      </div>
-      <div className={'map-margins'}>
-        <img src="http://via.placeholder.com/350x250" />
-      </div>
-      <RaisedButton
-        className={'button-margins'}
-        fullWidth={true}
-        label={<b>Let's make it happen!</b>}
-        primary={true}
-      />
-    </div>
-  </PaperRefined>
-)
+      </PaperRefined>
+    )
+  }
+}
 
 export default connect(
   state => ({

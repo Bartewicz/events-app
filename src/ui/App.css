@@ -12,8 +12,7 @@
   display: flex;
   flex-flow: column nowrap;
   flex-grow: 1;
-  max-width: 400px;
-  min-width: 300px;
+  min-width: 320px;
   margin: 10px;
 }
 
@@ -26,7 +25,11 @@
   margin: 0.5rem 0;
 }
 
-.map-margins {
+.map-wrapper {
+  display: flex;
+  flex-grow: 1;
+  height: 250px;
+  min-width: 300px;
   margin: 10px;
 }
 
