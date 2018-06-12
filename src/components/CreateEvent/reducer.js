@@ -42,7 +42,7 @@ export default (state = initialState, action) => {
 
 // Logic
 export const addEventToFirebase = () => (dispatch, getState) => {
-  if (getState().createEvent.newEventHeader && getState().createEvent.newEventDescription) {
+  if (getState().createEvent.newEventHeader.length >= 10 && getState().createEvent.newEventDescription) {
     const newEventKey = database.ref(`/events`).push().key
     const newEvent = {
       header: getState().createEvent.newEventHeader,
@@ -53,6 +53,8 @@ export const addEventToFirebase = () => (dispatch, getState) => {
       .then(() => dispatch(createEvent()))
       .then(() => dispatch(handleSuccess('Great! Your event was succesfully created!')))
       .catch(error => dispatch(handleExternalError(error)))
+    } else if (0 < getState().createEvent.newEventHeader < 10) {
+      dispatch(handleInternalError('Your title must be at least 10 characters long.'))
   } else if (!getState().createEvent.newEventHeader) {
     dispatch(handleInternalError('You need to add a title!'))
   } else if (!getState().createEvent.newEventDescription) {

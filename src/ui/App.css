@@ -12,7 +12,7 @@
   display: flex;
   flex-flow: column nowrap;
   flex-grow: 1;
-  min-width: 320px;
+  min-width: 300px;
   margin: 10px;
 }
 
@@ -25,10 +25,19 @@
   margin: 0.5rem 0;
 }
 
-.map-wrapper {
+.searchBox-wrapper {
   display: flex;
   flex-grow: 1;
-  height: 250px;
+  height: auto;
+  min-width: 300px;
+  margin: 10px;
+}
+
+.map-wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+  min-height: 300px;
   min-width: 300px;
   margin: 10px;
 }

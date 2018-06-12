@@ -1,23 +1,23 @@
 import React from 'react'
 // React-Redux
 import { connect } from 'react-redux'
+// Reducer
+import { addEventToFirebase, onNewHeaderChange, onNewDescChange } from './reducer'
 // Components
 import Map from '../Map/CreateEventMap'
+// Logic
+import * as mapLogic from '../Map/logic'
 // Material-ui
 import PaperRefined from '../../ui/PaperRefined'
 import { TextField, RaisedButton } from 'material-ui'
-// Reducer
-import { addEventToFirebase, onNewHeaderChange, onNewDescChange } from './reducer'
 
 class CreateEvent extends React.Component {
   state = {
     isMarkerShown: false,
-    markerPosition: {}
-  }
-
-  handleClick = (event) => {
-    let markerPosition = { lat: event.latLng.lat(), lng: event.latLng.lng() }
-    this.setState({ isMarkerShown: true, markerPosition })
+    markerPosition: {},
+    places: [],
+    searchBoxValue: '',
+    searchBoxRef: null
   }
 
   render() {
@@ -51,20 +51,22 @@ class CreateEvent extends React.Component {
               />
             </div>
           </div>
-          <div id={'map-wrapper'} className={'map-wrapper'}>
+          <div className={'map-wrapper'}>
+            {/* <div className={'searchBox-wrapper'}>
+            </div> */}
             <Map
-              isMarkerShown={this.state.isMarkerShown}
-              handleClick={this.handleClick}
-              markerPosition={this.state.markerPosition}
+            // isMarkerShown={this.state.isMarkerShown}
+            // handleClick={(event) => mapLogic.handleClick(event, this)}
+            // markerPosition={this.state.markerPosition}
+            />
+            <RaisedButton
+              className={'button-margins'}
+              fullWidth={true}
+              label={<b>Let's make it happen!</b>}
+              onClick={this.props.onEventAdd}
+              primary={true}
             />
           </div>
-          <RaisedButton
-            className={'button-margins'}
-            fullWidth={true}
-            label={<b>Let's make it happen!</b>}
-            onClick={this.props.onEventAdd}
-            primary={true}
-          />
         </div>
       </PaperRefined>
     )
