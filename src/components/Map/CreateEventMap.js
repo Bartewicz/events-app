@@ -14,6 +14,16 @@ class Map extends React.Component {
       mapTypeId: 'roadmap',
       zoom: 12
     })
+
+    let marker = new window.google.maps.Marker({
+      map: map
+    })
+
+    map.addListener('click', (event) => {
+      this.props.handleClick(event)
+      marker.setVisible(this.props.isMarkerShown)
+      marker.setPosition(this.props.markerPosition)
+    })
   }
 
   render() {

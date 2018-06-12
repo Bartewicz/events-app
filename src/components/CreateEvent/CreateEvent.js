@@ -55,9 +55,9 @@ class CreateEvent extends React.Component {
             {/* <div className={'searchBox-wrapper'}>
             </div> */}
             <Map
-            // isMarkerShown={this.state.isMarkerShown}
-            // handleClick={(event) => mapLogic.handleClick(event, this)}
-            // markerPosition={this.state.markerPosition}
+            isMarkerShown={this.state.isMarkerShown}
+            handleClick={(event) => mapLogic.handleClick(event, this)}
+            markerPosition={this.state.markerPosition}
             />
             <RaisedButton
               className={'button-margins'}
