@@ -16,6 +16,14 @@
   margin: 10px;
 }
 
+.text-left {
+  text-align: left;
+}
+
+.no-margins {
+  margin: 0;
+}
+
 .buttons-wrapper {
   display: flex;
   justify-content: center;

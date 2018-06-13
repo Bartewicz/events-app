@@ -3,7 +3,7 @@ export const handleClick = (event, self) => {
   self.setState({ isMarkerShown: true, markerPosition })
 }
 
-export const onSearchBoxMounted = (searchBoxRef, self) => {
+export const setReftoSearchBox = (searchBoxRef, self) => {
   self.setState({ searchBoxRef })
 }
 
@@ -11,7 +11,10 @@ export const changeHandler = (event, searchBoxValue, self) => {
   self.setState({ searchBoxValue })
 }
 
-export const onPlacesChanged = (self) => {
-  const places = self.state.searchBoxRef.getPlaces()
-  console.log('This are the places', places)
+export const onPlacesChanged = (place, self) => {
+  self.setState({ place })
+}
+
+export const setRefToMap = (map, self) => {
+  self.setState({ map })
 }
