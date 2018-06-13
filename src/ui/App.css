@@ -24,6 +24,11 @@
   margin: 0;
 }
 
+.display-block {
+  display: block;
+  height: 1rem;
+}
+
 .buttons-wrapper {
   display: flex;
   justify-content: center;
