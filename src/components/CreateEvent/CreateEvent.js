@@ -14,22 +14,9 @@ import SearchBox from '../Map/SearchBox';
 
 class CreateEvent extends React.Component {
   state = {
-    isMarkerShown: false,
-    markerPosition: {},
-    place: {},
-    searchBoxRef: null,
-    map: null
-  }
-
-  setPlaceFromResponse = (place) => {
-    this.setState({ place })
-    let lat = place.geometry.location.lat()
-    let lng = place.geometry.location.lng()
-    let markerPosition = { lat, lng }
-    this.setState({ markerPosition })
-    console.log('CreateEvent markerPosition at state', this.state.markerPosition)
-    this.setState({ isMarkerShown: true })
-    console.log('CreateEvent isMarkerShown at state', this.state.isMarkerShown)
+    map: null,
+    marker: null,
+    place: {}
   }
 
   render() {
@@ -40,7 +27,7 @@ class CreateEvent extends React.Component {
             <h2>Create new event</h2>
             <div>
               <h3 className={'text-left no-margins'}>Localization:</h3>
-              <span>{this.state.place.formatted_address}</span>
+              <span className={'display-block'}>{this.state.place.formatted_address}</span>
               <h3 className={'text-left no-margins'}>Title:</h3>
               <br />
               <TextField
@@ -70,16 +57,15 @@ class CreateEvent extends React.Component {
               <SearchBox
                 onPlacesChanged={(place) => mapLogic.onPlacesChanged(place, this)}
                 map={this.state.map}
-                setPlaceFromResponse={this.setPlaceFromResponse}
+                marker={this.state.marker}
+                setPlaceFromResponse={(place) => mapLogic.setPlaceFromResponse(place, this)}
               />
             </div>
             <Map
               context={this}
-              isMarkerShown={this.state.isMarkerShown}
-              handleClick={(event) => mapLogic.handleClick(event, this)}
-              markerPosition={this.state.markerPosition}
               setRefToMap={(map) => mapLogic.setRefToMap(map, this)}
-              setPlaceFromResponse={this.setPlaceFromResponse}
+              setRefToMarker={(marker) => mapLogic.setRefToMarker(marker, this)}
+              setPlaceFromResponse={(place) => mapLogic.setPlaceFromResponse(place, this)}
             />
             <RaisedButton
               className={'button-margins'}

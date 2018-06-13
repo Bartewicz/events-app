@@ -16,22 +16,22 @@ class Map extends React.Component {
     })
 
     let marker = new window.google.maps.Marker({
-      map: map,
-      visible: this.props.isMarkerShown,
-      position: this.props.markerPosition
+      map: map
     })
 
     map.addListener('click', (event) => {
-      this.props.handleClick(event)
-      marker.setVisible(this.props.isMarkerShown)
-      marker.setPosition(this.props.markerPosition)
+      let location = { lat: event.latLng.lat(), lng: event.latLng.lng() }
+      marker.setVisible(true)
+      marker.setPosition(location)
 
-      let geocoder = new window.google.maps.Geocoder().geocode({location: this.props.markerPosition}, (array, status) => {
+      let place = new window.google.maps.Geocoder().geocode({ location }, (array, status) => {
         this.props.setPlaceFromResponse(array[0])
+        console.log(array[0])
       })
     })
 
     this.props.setRefToMap(map)
+    this.props.setRefToMarker(marker)
   }
 
   render() {
