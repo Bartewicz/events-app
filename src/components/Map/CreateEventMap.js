@@ -1,6 +1,4 @@
 import React from 'react'
-import { compose, withProps } from 'recompose'
-import { GoogleMap, Marker, withGoogleMap, withScriptjs } from 'react-google-maps'
 
 class Map extends React.Component {
   state = {
@@ -10,35 +8,37 @@ class Map extends React.Component {
     }
   }
 
+  componentDidMount() {
+    let map = new window.google.maps.Map(document.getElementById('map'), {
+      center: this.state.defaultCenter,
+      mapTypeId: 'roadmap',
+      zoom: 12
+    })
+
+    let marker = new window.google.maps.Marker({
+      map: map,
+      visible: this.props.isMarkerShown,
+      position: this.props.markerPosition
+    })
+
+    map.addListener('click', (event) => {
+      this.props.handleClick(event)
+      marker.setVisible(this.props.isMarkerShown)
+      marker.setPosition(this.props.markerPosition)
+
+      let geocoder = new window.google.maps.Geocoder().geocode({location: this.props.markerPosition}, (array, status) => {
+        this.props.setPlaceFromResponse(array[0])
+      })
+    })
+
+    this.props.setRefToMap(map)
+  }
+
   render() {
     return (
-      <div>
-        <GoogleMap
-          center={this.state.defaultCenter}
-          defaultZoom={12}
-          onClick={this.props.handleClick}
-        >
-          {
-            this.props.isMarkerShown ?
-              <Marker
-                position={this.props.markerPosition}
-              />
-              :
-              null
-          }
-        </GoogleMap>
-      </div>
+      <div id='map' />
     )
   }
 }
 
-export default compose(
-  withProps({
-    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyDLJXIYnOaSmYK2OT91_Vsn-mWT4bGufJ0",
-    containerElement: <div style={{ width: '100%', height: '100%' }} />,
-    loadingElement: <div>Loading resources...</div>,
-    mapElement: <div style={{ width: '100%', height: '100%' }} />,
-  }),
-  withScriptjs,
-  withGoogleMap
-)(Map)
+export default Map
