@@ -1,10 +1,11 @@
 # Eve.nt | Make it happen!
 
 A simple app invented to manage events.
+You can try it out [here](https://event-app.surge.sh/)
 
 ## Features
 
-It is developed with an idea to let you do the following actions:
+It is developed to let you create and manage events with the following actions:
 
 - create an event with a title and description,
 - add an image right from your device,
