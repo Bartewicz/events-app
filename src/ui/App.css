@@ -24,6 +24,12 @@
   margin: 10px;
 }
 
+.event-add-button-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+}
+
 .buttons-wrapper {
   display: flex;
   justify-content: center;
