@@ -8,9 +8,10 @@ import LogInByGoogle from './LogInByGoogle'
 import RestorePassword from './RestorePassword'
 import CreateUser from './CreateUser'
 // UI
+import logoBig from '../../img/logo-big.gif'
 import PaperRefined from '../../ui/PaperRefined'
 import LogInByMailAndPass from './LogInByMailAndPass'
-import QuestionAnswer from 'material-ui/svg-icons/action/question-answer'
+import QuestionAnswer from 'material-ui/svg-icons/action/help-outline'
 
 class Auth extends React.Component {
   state = {
@@ -36,11 +37,27 @@ class Auth extends React.Component {
               <PaperRefined centered>
                 <div className={'auth-wrapper'}>
                   <h3>Welcome to</h3>
+                  <img className={'logo-big'} src={logoBig} alt={'Logo'} />
                   <h1>Eve</h1>
-                  <h3>best events organiser</h3>
+                  <h3 className={'no-margin-top'}>
+                    <em>probably best events organiser</em>
+                  </h3>
                   <span>
                     Log in to start:
-                    <QuestionAnswer />
+                      <div
+                      className={'help-icon'}
+                    >
+                      <QuestionAnswer
+                        color={'#808080'}
+                      />
+                      <span
+                        className={'tooltip'}
+                      >
+                        <em>
+                          You can try this: trial@event.app password123
+                        </em>
+                      </span>
+                    </div>
                   </span>
                   <LogInByMailAndPass
                     toggleRestorePassSection={this.toggleRestorePassSection}

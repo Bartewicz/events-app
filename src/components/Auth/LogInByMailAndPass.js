@@ -42,7 +42,7 @@ class LogInByMailAndPass extends React.Component {
         </span>
         <RaisedButton
           className={'button-margins'}
-          label={'Log in!'}
+          label={'Sign up and log in!'}
           onClick={() => this.props.logInByMailAndPass(this.state.email, this.state.password)}
           secondary={true}
         />
