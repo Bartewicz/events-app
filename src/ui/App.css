@@ -30,7 +30,7 @@
   flex-grow: 1;
 }
 
-.buttons-wrapper {
+.flex-center {
   display: flex;
   justify-content: center;
 }
@@ -45,6 +45,10 @@
 
 .no-margins {
   margin: 0;
+}
+
+.no-margin-top {
+  margin-top: 0;
 }
 
 .display-block {
@@ -139,9 +143,16 @@
 
 /* <-- Auth --> */
 
+.logo-big {
+  width: 5rem;
+  height: 5rem;
+  margin-left: 0;
+}
+
 .auth-wrapper {
   display: flex;
   flex-flow: column nowrap;
+  align-items: center;
   flex-grow: 1;
   max-width: 500px;
   min-width: 300px;
@@ -154,4 +165,48 @@
   font-size: 0.9rem;
   font-weight: bold;
   margin-top: 0.5rem;
+}
+
+/* Tooltip text */
+
+.help-icon {
+  color: #808080;
+  position: relative;
+  display: inline-block;
+}
+
+.help-icon .tooltip {
+  /*  Tooltip field style */
+  width: 110px;
+  background-color: #808080;
+  color: #fff;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  /* Tooltip Position */
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+
+.help-icon .tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #808080 transparent transparent transparent;
+}
+
+.help-icon:hover .tooltip {
+  opacity: 1;
 }
