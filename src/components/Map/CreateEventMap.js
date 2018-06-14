@@ -20,25 +20,26 @@ class Map extends React.Component {
     })
 
     map.addListener('click', (event) => {
-      let location = { lat: event.latLng.lat(), lng: event.latLng.lng() }
-      marker.setVisible(true)
-      marker.setPosition(location)
+      if (event) {
+        let location = { lat: event.latLng.lat(), lng: event.latLng.lng() }
+        marker.setVisible(true)
+        marker.setPosition(location)
 
-      let place = new window.google.maps.Geocoder().geocode({ location }, (array, status) => {
-        this.props.setPlaceFromResponse(array[0])
-        console.log(array[0])
-      })
-    })
+        let place = new window.google.maps.Geocoder().geocode({ location }, (array, status) => {
+          this.props.setPlaceFromResponse(array[0])
+        })
+      }
+  })
 
     this.props.setRefToMap(map)
-    this.props.setRefToMarker(marker)
+this.props.setRefToMarker(marker)
   }
 
-  render() {
-    return (
-      <div id='map' />
-    )
-  }
+render() {
+  return (
+    <div id='map' />
+  )
+}
 }
 
 export default Map

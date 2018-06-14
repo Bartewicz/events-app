@@ -15,9 +15,6 @@ class App extends Component {
     return (
       <div>
         <AppBar />
-        <h1 className={'text-center'}>
-          Hello, World!
-        </h1>
         <CreateEvent />
         <Snackbar
           autoHideDuration={4000}

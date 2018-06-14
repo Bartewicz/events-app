@@ -10,6 +10,7 @@ import CreateUser from './CreateUser'
 // UI
 import PaperRefined from '../../ui/PaperRefined'
 import LogInByMailAndPass from './LogInByMailAndPass'
+import QuestionAnswer from 'material-ui/svg-icons/action/question-answer'
 
 class Auth extends React.Component {
   state = {
@@ -33,12 +34,13 @@ class Auth extends React.Component {
             <div>
               <AppBar />
               <PaperRefined centered>
-                <div className={'wrapper'}>
+                <div className={'auth-wrapper'}>
                   <h3>Welcome to</h3>
                   <h1>Eve</h1>
                   <h3>best events organiser</h3>
                   <span>
                     Log in to start:
+                    <QuestionAnswer />
                   </span>
                   <LogInByMailAndPass
                     toggleRestorePassSection={this.toggleRestorePassSection}
@@ -46,18 +48,15 @@ class Auth extends React.Component {
                   <span>
                     or
                   </span>
-                  <br />
                   <LogInByGoogle
                     onLogInClick={this.props.logInByGoogle}
                   />
-                  <br />
                   <span
                     className={'auth-label'}
                     onClick={this.toggleSignUpSection}
                   >
                     Don't have any account yet?
                   </span>
-                  <br />
                   {
                     this.state.isRestorePasswordOpen ?
                       <div>

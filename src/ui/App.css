@@ -4,6 +4,14 @@
   text-align: center;
 }
 
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
 .link {
   text-decoration: none;
 }
@@ -16,19 +24,6 @@
   margin: 10px;
 }
 
-.text-left {
-  text-align: left;
-}
-
-.no-margins {
-  margin: 0;
-}
-
-.display-block {
-  display: block;
-  height: 1rem;
-}
-
 .buttons-wrapper {
   display: flex;
   justify-content: center;
@@ -38,21 +33,17 @@
   margin: 0.5rem 0;
 }
 
-.searchBox-wrapper {
-  display: flex;
-  flex-grow: 1;
-  height: auto;
-  min-width: 300px;
+.map-margins {
   margin: 10px;
 }
 
-.map-wrapper {
-  display: flex;
-  flex-flow: column nowrap;
-  flex-grow: 1;
-  min-height: 300px;
-  min-width: 300px;
-  margin: 10px;
+.no-margins {
+  margin: 0;
+}
+
+.display-block {
+  display: block;
+  height: 1rem;
 }
 
 /* PaperRefined */
@@ -120,14 +111,14 @@
 /* <-- CreateEvent --> */
 
 .event-title {
-  display: inline-block;
   margin: 0;
 }
 
 .add-event-wrapper {
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-flow: row wrap;
+  justify-content: space-around;
   align-items: flex-start;
 }
 
@@ -140,14 +131,16 @@
 
 /* <-- Dashboard --> */
 
-.events-wrapper {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
-  align-items: flex-start;
-}
-
 /* <-- Auth --> */
+
+.auth-wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+  max-width: 500px;
+  min-width: 300px;
+  margin: 10px;
+}
 
 .auth-label {
   cursor: pointer;
