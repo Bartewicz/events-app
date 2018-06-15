@@ -1,4 +1,7 @@
 import React from 'react'
+// Redux & state
+import { connect } from 'react-redux'
+import { setPlaceOnMapClick } from './reducer'
 
 class Map extends React.Component {
   state = {
@@ -21,25 +24,29 @@ class Map extends React.Component {
 
     map.addListener('click', (event) => {
       if (event) {
+        // console.log(event)
         let location = { lat: event.latLng.lat(), lng: event.latLng.lng() }
         marker.setVisible(true)
         marker.setPosition(location)
 
-        let place = new window.google.maps.Geocoder().geocode({ location }, (array, status) => {
-          this.props.setPlaceFromResponse(array[0])
-        })
+        this.props.setPlaceOnMapClick(location)
       }
-  })
+    })
 
     this.props.setRefToMap(map)
-this.props.setRefToMarker(marker)
+    this.props.setRefToMarker(marker)
   }
 
-render() {
-  return (
-    <div id='map' />
-  )
-}
+  render() {
+    return (
+      <div id='map' />
+    )
+  }
 }
 
-export default Map
+export default connect(
+  state => ({}),
+  dispatch => ({
+    setPlaceOnMapClick: (location) => dispatch(setPlaceOnMapClick(location))
+  })
+)(Map)

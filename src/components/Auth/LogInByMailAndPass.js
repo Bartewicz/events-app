@@ -51,14 +51,9 @@ class LogInByMailAndPass extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-})
-
-const mapDispatchToProps = dispatch => ({
-  logInByMailAndPass: (email, password) => dispatch(logInByMailAndPass(email, password))
-})
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  state => ({}),
+  dispatch => ({
+    logInByMailAndPass: (email, password) => dispatch(logInByMailAndPass(email, password))
+  })
 )(LogInByMailAndPass)

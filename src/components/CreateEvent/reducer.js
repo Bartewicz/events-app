@@ -1,5 +1,6 @@
 import { database } from '../../firebase'
 import { handleSuccess, handleInternalError, handleExternalError } from '../Alerts/reducer'
+import { clearPlace } from '../Map/reducer'
 
 // Actions types
 const CREATE_EVENT = 'createEvent/CREATE_EVENT'
@@ -47,10 +48,12 @@ export const addEventToFirebase = () => (dispatch, getState) => {
     const newEvent = {
       header: getState().createEvent.newEventHeader,
       description: getState().createEvent.newEventDescription,
+      place: getState().maps.place
     }
     database.ref(`/events/${newEventKey}`)
       .set(newEvent)
       .then(() => dispatch(createEvent()))
+      .then(() => dispatch(clearPlace()))
       .then(() => dispatch(handleSuccess('Great! Your event was succesfully created!')))
       .catch(error => dispatch(handleExternalError(error)))
     } else if (0 < getState().createEvent.newEventHeader < 10) {

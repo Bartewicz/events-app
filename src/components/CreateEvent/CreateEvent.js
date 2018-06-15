@@ -15,22 +15,25 @@ import SearchBox from '../Map/SearchBox';
 class CreateEvent extends React.Component {
   state = {
     map: null,
-    marker: null,
-    place: {}
+    marker: null
   }
 
   render() {
     return (
-      <div>
-        <h1 className={'text-center'}>
-          Create new event
-        </h1>
+      <main>
+        <div className={'paper'}>
+          <h1 className={'text-center no-margins'}>
+            Create new event
+          </h1>
+        </div>
         <PaperRefined>
           <div className={'add-event-wrapper'}>
             <div className={'text-left wrapper'}>
               <div>
                 <h3 className={'no-margins'}>Localization:</h3>
-                <span className={'display-block text-center'}>{this.state.place.formatted_address}</span>
+                <div className={'flex-center'}>
+                  <span className={'event-location text-center'}>{this.props.place.formatted_address}</span>
+                </div>
                 <h3 className={'text-left no-margins'}>Title:</h3>
                 <br />
                 <TextField
@@ -64,14 +67,12 @@ class CreateEvent extends React.Component {
                   onPlacesChanged={(place) => mapLogic.onPlacesChanged(place, this)}
                   map={this.state.map}
                   marker={this.state.marker}
-                  setPlaceFromResponse={(place) => mapLogic.setPlaceFromResponse(place, this)}
                 />
               </div>
               <Map
                 context={this}
                 setRefToMap={(map) => mapLogic.setRefToMap(map, this)}
                 setRefToMarker={(marker) => mapLogic.setRefToMarker(marker, this)}
-                setPlaceFromResponse={(place) => mapLogic.setPlaceFromResponse(place, this)}
               />
             </div>
           </div>
@@ -88,7 +89,7 @@ class CreateEvent extends React.Component {
             </div>
           </div>
         </PaperRefined>
-      </div >
+      </main>
     )
   }
 }
@@ -96,7 +97,8 @@ class CreateEvent extends React.Component {
 export default connect(
   state => ({
     newEventHeader: state.createEvent.newEventHeader,
-    newEventDescription: state.createEvent.newEventDescription
+    newEventDescription: state.createEvent.newEventDescription,
+    place: state.maps.place
   }),
   dispatch => ({
     onEventAdd: () => dispatch(addEventToFirebase()),
