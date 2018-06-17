@@ -23,6 +23,7 @@ class LogInByMailAndPass extends React.Component {
         <TextField
           fullWidth={true}
           hintText={'Type your email adress here'}
+          inputStyle={{ color: '#0097A7' }}
           name={'email'}
           onChange={this.emailHandler}
           onKeyPress={(event) => {
@@ -35,6 +36,7 @@ class LogInByMailAndPass extends React.Component {
         <TextField
           fullWidth={true}
           hintText={'Type your password here'}
+          inputStyle={{ color: '#0097A7' }}
           name={'password'}
           onChange={this.passwordHandler}
           onKeyPress={(event) => {
@@ -56,8 +58,9 @@ class LogInByMailAndPass extends React.Component {
           onClick={() => this.props.logInByMailAndPass(this.state.email, this.state.password)}
           onKeyPress={(event) => {
             if (event.key === 'Enter') {
-            this.props.logInByMailAndPass(this.state.email, this.state.password)
-          }}}
+              this.props.logInByMailAndPass(this.state.email, this.state.password)
+            }
+          }}
           secondary={true}
         />
       </div>

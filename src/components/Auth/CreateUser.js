@@ -30,6 +30,7 @@ class LogInByMailAndPass extends React.Component {
         <TextField
           fullWidth={true}
           hintText={'Type your email adress here'}
+          inputStyle={{ color: '#0097A7' }}
           onChange={this.emailHandler}
           onKeyPress={(event) => {
             if (event.key === 'Enter') {
@@ -42,6 +43,7 @@ class LogInByMailAndPass extends React.Component {
         <TextField
           fullWidth={true}
           hintText={'Type your password here'}
+          inputStyle={{ color: '#0097A7' }}
           onChange={this.passwordHandler}
           onKeyPress={(event) => {
             if (event.key === 'Enter') {
@@ -54,6 +56,7 @@ class LogInByMailAndPass extends React.Component {
         <TextField
           fullWidth={true}
           hintText={'Retype your password here'}
+          inputStyle={{ color: '#0097A7' }}
           name={'password-retyped'}
           onChange={this.passwordRetypedHandler}
           onKeyPress={(event) => {
@@ -79,14 +82,10 @@ class LogInByMailAndPass extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-})
-
-const mapDispatchToProps = dispatch => ({
-  createUser: (email, password, passwordRetyped) => dispatch(createUser(email, password, passwordRetyped))
-})
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  state => ({
+  }),
+  dispatch => ({
+    createUser: (email, password, passwordRetyped) => dispatch(createUser(email, password, passwordRetyped))
+  })
 )(LogInByMailAndPass)

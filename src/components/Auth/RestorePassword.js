@@ -22,6 +22,7 @@ class RestorePassword extends React.Component {
         <TextField
           fullWidth={true}
           hintText={'Type your email adress here'}
+          inputStyle={{ color: '#0097A7' }}
           onChange={this.emailHandler}
           onKeyPress={(event) => {
             if (event.key === 'Enter') {
@@ -37,8 +38,9 @@ class RestorePassword extends React.Component {
           onClick={() => this.props.restorePassword(this.state.email)}
           onKeyPress={(event) => {
             if (event.key === 'Enter') {
-            this.props.restorePassword(this.state.email)
-          }}}
+              this.props.restorePassword(this.state.email)
+            }
+          }}
           secondary={true}
         />
       </div>

@@ -30,15 +30,29 @@ class CreateEvent extends React.Component {
           <div className={'add-event-wrapper'}>
             <div className={'text-left wrapper'}>
               <div>
-                <h3 className={'no-margins'}>Localization:</h3>
-                <div className={'flex-center'}>
-                  <span className={'event-location text-center'}>{this.props.place.formatted_address}</span>
+                <div className={'flex-space-between'}>
+                  <h3 className={'section-title display-inline no-margins'}>
+                    Created by:
+                    </h3>
+                  <h3 className={'display-inline no-margins text-gray'}>
+                    {
+                      this.props.user.displayName ?
+                        this.props.user.displayName
+                        :
+                        this.props.user.email
+                    }
+                  </h3>
                 </div>
-                <h3 className={'text-left no-margins'}>Title:</h3>
+                <h3 className={'section-title no-margins'}>Localization:</h3>
+                <div className={'flex-center'}>
+                  <span className={'event-location text-gray'}>{this.props.place.formatted_address}</span>
+                </div>
+                <h3 className={'section-title text-left no-margins'}>Title:</h3>
                 <br />
                 <TextField
                   fullWidth={true}
                   hintText={'Type a title of your event here'}
+                  inputStyle={{ color: '#0097A7' }}
                   name={'new-event'}
                   onChange={this.props.onNewHeaderChange}
                   value={this.props.newEventHeader}
@@ -46,11 +60,12 @@ class CreateEvent extends React.Component {
               </div>
               <hr />
               <div>
-                <h3 className={'text-left no-margins'}>Description:</h3>
+                <h3 className={'section-title text-left no-margins'}>Description:</h3>
                 <br />
                 <TextField
                   fullWidth={true}
                   hintText={'Type a description here'}
+                  inputStyle={{ color: '#0097A7' }}
                   multiLine={true}
                   name={'new-event'}
                   onChange={this.props.onNewDescChange}
@@ -59,7 +74,7 @@ class CreateEvent extends React.Component {
               </div>
             </div>
             <div className={'wrapper'}>
-              <h3 className={'no-margins'}>
+              <h3 className={'section-title no-margins'}>
                 Specify location:
               </h3>
               <div className={'searchBox-wrapper'}>
@@ -96,6 +111,7 @@ class CreateEvent extends React.Component {
 
 export default connect(
   state => ({
+    user: state.auth.user,
     newEventHeader: state.createEvent.newEventHeader,
     newEventDescription: state.createEvent.newEventDescription,
     place: state.maps.place

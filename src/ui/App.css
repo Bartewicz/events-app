@@ -31,10 +31,20 @@
   flex-grow: 1;
 }
 
+.display-inline {
+  display: inline;
+}
+
 .flex-center {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+
+.flex-space-between {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .button-margins {
@@ -126,6 +136,14 @@
   display: flex;
   flex-shrink: 1;
   min-height: 1rem;
+}
+
+.section-title {
+  color: #606060;
+}
+
+.text-gray {
+  color: #0097A7;
 }
 
 .event-title {

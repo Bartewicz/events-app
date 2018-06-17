@@ -17,11 +17,9 @@ class Map extends React.Component {
       mapTypeId: 'roadmap',
       zoom: 12
     })
-
     let marker = new window.google.maps.Marker({
       map: map
     })
-
     map.addListener('click', (event) => {
       if (event) {
         let location = { lat: event.latLng.lat(), lng: event.latLng.lng() }
@@ -33,7 +31,6 @@ class Map extends React.Component {
         this.props.setPlaceOnMapClick(location)
       }
     })
-
     this.props.setRefToMap(map)
     this.props.setRefToMarker(marker)
   }
