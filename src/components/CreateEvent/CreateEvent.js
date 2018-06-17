@@ -15,27 +15,44 @@ import SearchBox from '../Map/SearchBox';
 class CreateEvent extends React.Component {
   state = {
     map: null,
-    marker: null,
-    place: {}
+    marker: null
   }
 
   render() {
     return (
-      <div>
-        <h1 className={'text-center'}>
-          Create new event
-        </h1>
+      <main>
+        <div className={'paper'}>
+          <h1 className={'text-center no-margins'}>
+            Create new event
+          </h1>
+        </div>
         <PaperRefined>
           <div className={'add-event-wrapper'}>
             <div className={'text-left wrapper'}>
               <div>
-                <h3 className={'no-margins'}>Localization:</h3>
-                <span className={'display-block text-center'}>{this.state.place.formatted_address}</span>
-                <h3 className={'text-left no-margins'}>Title:</h3>
+                <div className={'flex-space-between'}>
+                  <h3 className={'section-title display-inline no-margins'}>
+                    Created by:
+                    </h3>
+                  <h3 className={'display-inline no-margins text-gray'}>
+                    {
+                      this.props.user.displayName ?
+                        this.props.user.displayName
+                        :
+                        this.props.user.email
+                    }
+                  </h3>
+                </div>
+                <h3 className={'section-title no-margins'}>Localization:</h3>
+                <div className={'flex-center'}>
+                  <span className={'event-location text-gray'}>{this.props.place.formatted_address}</span>
+                </div>
+                <h3 className={'section-title text-left no-margins'}>Title:</h3>
                 <br />
                 <TextField
                   fullWidth={true}
                   hintText={'Type a title of your event here'}
+                  inputStyle={{ color: '#0097A7' }}
                   name={'new-event'}
                   onChange={this.props.onNewHeaderChange}
                   value={this.props.newEventHeader}
@@ -43,11 +60,12 @@ class CreateEvent extends React.Component {
               </div>
               <hr />
               <div>
-                <h3 className={'text-left no-margins'}>Description:</h3>
+                <h3 className={'section-title text-left no-margins'}>Description:</h3>
                 <br />
                 <TextField
                   fullWidth={true}
                   hintText={'Type a description here'}
+                  inputStyle={{ color: '#0097A7' }}
                   multiLine={true}
                   name={'new-event'}
                   onChange={this.props.onNewDescChange}
@@ -56,7 +74,7 @@ class CreateEvent extends React.Component {
               </div>
             </div>
             <div className={'wrapper'}>
-              <h3 className={'no-margins'}>
+              <h3 className={'section-title no-margins'}>
                 Specify location:
               </h3>
               <div className={'searchBox-wrapper'}>
@@ -64,14 +82,12 @@ class CreateEvent extends React.Component {
                   onPlacesChanged={(place) => mapLogic.onPlacesChanged(place, this)}
                   map={this.state.map}
                   marker={this.state.marker}
-                  setPlaceFromResponse={(place) => mapLogic.setPlaceFromResponse(place, this)}
                 />
               </div>
               <Map
                 context={this}
                 setRefToMap={(map) => mapLogic.setRefToMap(map, this)}
                 setRefToMarker={(marker) => mapLogic.setRefToMarker(marker, this)}
-                setPlaceFromResponse={(place) => mapLogic.setPlaceFromResponse(place, this)}
               />
             </div>
           </div>
@@ -88,15 +104,17 @@ class CreateEvent extends React.Component {
             </div>
           </div>
         </PaperRefined>
-      </div >
+      </main>
     )
   }
 }
 
 export default connect(
   state => ({
+    user: state.auth.user,
     newEventHeader: state.createEvent.newEventHeader,
-    newEventDescription: state.createEvent.newEventDescription
+    newEventDescription: state.createEvent.newEventDescription,
+    place: state.maps.place
   }),
   dispatch => ({
     onEventAdd: () => dispatch(addEventToFirebase()),

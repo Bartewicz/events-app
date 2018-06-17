@@ -26,36 +26,55 @@ class LogInByMailAndPass extends React.Component {
       <div
         className={'text-center'}
       >
-        <div
-          className={'wrapper'}
-        >
-          <h3>Fill all fields below to create an account and login:</h3>
-          <TextField
-            fullWidth={true}
-            hintText={'Type your email adress here'}
-            name={'email'}
-            onChange={this.emailHandler}
-            type={'email'}
-          />
-          <TextField
-            fullWidth={true}
-            hintText={'Type your password here'}
-            onChange={this.passwordHandler}
-            name={'password'}
-            type={'password'}
-          />
-          <TextField
-            fullWidth={true}
-            hintText={'Retype your password here'}
-            name={'password-retyped'}
-            onChange={this.passwordRetypedHandler}
-            type={'password'}
-          />
-        </div>
+        <h3>Fill all fields below to create an account and login:</h3>
+        <TextField
+          fullWidth={true}
+          hintText={'Type your email adress here'}
+          inputStyle={{ color: '#0097A7' }}
+          onChange={this.emailHandler}
+          onKeyPress={(event) => {
+            if (event.key === 'Enter') {
+              this.props.createUser(this.state.email, this.state.password, this.state.passwordRetyped)
+            }
+          }}
+          name={'email'}
+          type={'email'}
+        />
+        <TextField
+          fullWidth={true}
+          hintText={'Type your password here'}
+          inputStyle={{ color: '#0097A7' }}
+          onChange={this.passwordHandler}
+          onKeyPress={(event) => {
+            if (event.key === 'Enter') {
+              this.props.createUser(this.state.email, this.state.password, this.state.passwordRetyped)
+            }
+          }}
+          name={'password'}
+          type={'password'}
+        />
+        <TextField
+          fullWidth={true}
+          hintText={'Retype your password here'}
+          inputStyle={{ color: '#0097A7' }}
+          name={'password-retyped'}
+          onChange={this.passwordRetypedHandler}
+          onKeyPress={(event) => {
+            if (event.key === 'Enter') {
+              this.props.createUser(this.state.email, this.state.password, this.state.passwordRetyped)
+            }
+          }}
+          type={'password'}
+        />
         <RaisedButton
           className={'button-margins'}
-          label={'Log in!'}
+          label={'Sign up and log in!'}
           onClick={() => this.props.createUser(this.state.email, this.state.password, this.state.passwordRetyped)}
+          onKeyPress={(event) => {
+            if (event.key === 'Enter') {
+              this.props.createUser(this.state.email, this.state.password, this.state.passwordRetyped)
+            }
+          }}
           secondary={true}
         />
       </div>
@@ -63,14 +82,10 @@ class LogInByMailAndPass extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-})
-
-const mapDispatchToProps = dispatch => ({
-  createUser: (email, password, passwordRetyped) => dispatch(createUser(email, password, passwordRetyped))
-})
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  state => ({
+  }),
+  dispatch => ({
+    createUser: (email, password, passwordRetyped) => dispatch(createUser(email, password, passwordRetyped))
+  })
 )(LogInByMailAndPass)

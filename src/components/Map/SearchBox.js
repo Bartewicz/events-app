@@ -1,4 +1,7 @@
 import React from 'react'
+// Redux & state
+import { connect } from 'react-redux'
+import { clearPlace, setPlaceFromAutocomplete } from './reducer'
 // UI
 import { TextField } from 'material-ui'
 
@@ -9,16 +12,21 @@ class SearchBox extends React.Component {
     input.addListener('place_changed', () => {
       if (input.getPlace().geometry) {
         let place = input.getPlace()
-        console.log(place)
         if (place.name) {
-          let lat = place.geometry.location.lat()
-          let lng = place.geometry.location.lng()
-          this.props.setPlaceFromResponse(place)
-          this.props.marker.setPosition({ lat, lng })
-        } else {
-          this.props.marker.setVisible(false)
-          this.props.setPlaceFromResponse(place)
-        }
+          let location = {
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng()
+          }
+          this.props.map.panTo(location)
+
+          this.props.marker.setPosition(location)
+          this.props.marker.setVisible(true)
+          
+          this.props.setPlaceFromAutocomplete(place)
+        } else { }
+      } else {
+        this.props.marker.setVisible(false)
+        this.props.clearPlace()
       }
     })
   }
@@ -29,6 +37,7 @@ class SearchBox extends React.Component {
         <TextField
           id={'pac-input'}
           fullWidth={true}
+          inputStyle={{ color: '#0097A7' }}
           onChange={this.props.changeHandler}
           name={'search-box'}
           type={'text'}
@@ -39,4 +48,10 @@ class SearchBox extends React.Component {
   }
 }
 
-export default SearchBox
+export default connect(
+  state => ({}),
+  dispatch => ({
+    clearPlace: (location) => dispatch(clearPlace(location)),
+    setPlaceFromAutocomplete: (location) => dispatch(setPlaceFromAutocomplete(location))
+  })
+)(SearchBox)

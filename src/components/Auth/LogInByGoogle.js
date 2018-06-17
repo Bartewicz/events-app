@@ -8,6 +8,11 @@ const LogInByGoogle = (props) => (
       className={'button-margins'}
       label={'Log in by Google!'}
       onClick={props.onLogInClick}
+      onKeyPress={(event) => {
+        if (event.key === 'Enter') {
+          props.onLogInClick()
+        }
+      }}
       secondary={true}
     />
   </div>

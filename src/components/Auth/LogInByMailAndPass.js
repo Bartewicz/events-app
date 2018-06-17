@@ -23,15 +23,27 @@ class LogInByMailAndPass extends React.Component {
         <TextField
           fullWidth={true}
           hintText={'Type your email adress here'}
+          inputStyle={{ color: '#0097A7' }}
           name={'email'}
           onChange={this.emailHandler}
+          onKeyPress={(event) => {
+            if (event.key === 'Enter') {
+              this.props.logInByMailAndPass(this.state.email, this.state.password)
+            }
+          }}
           type={'email'}
         />
         <TextField
           fullWidth={true}
           hintText={'Type your password here'}
+          inputStyle={{ color: '#0097A7' }}
           name={'password'}
           onChange={this.passwordHandler}
+          onKeyPress={(event) => {
+            if (event.key === 'Enter') {
+              this.props.logInByMailAndPass(this.state.email, this.state.password)
+            }
+          }}
           type={'password'}
         />
         <span
@@ -42,8 +54,13 @@ class LogInByMailAndPass extends React.Component {
         </span>
         <RaisedButton
           className={'button-margins'}
-          label={'Sign up and log in!'}
+          label={'Log in!'}
           onClick={() => this.props.logInByMailAndPass(this.state.email, this.state.password)}
+          onKeyPress={(event) => {
+            if (event.key === 'Enter') {
+              this.props.logInByMailAndPass(this.state.email, this.state.password)
+            }
+          }}
           secondary={true}
         />
       </div>
@@ -51,14 +68,9 @@ class LogInByMailAndPass extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-})
-
-const mapDispatchToProps = dispatch => ({
-  logInByMailAndPass: (email, password) => dispatch(logInByMailAndPass(email, password))
-})
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  state => ({}),
+  dispatch => ({
+    logInByMailAndPass: (email, password) => dispatch(logInByMailAndPass(email, password))
+  })
 )(LogInByMailAndPass)

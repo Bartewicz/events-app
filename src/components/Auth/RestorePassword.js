@@ -18,23 +18,30 @@ class RestorePassword extends React.Component {
       <div
         className={'text-center'}
       >
-        <div
-          className={'wrapper'}
-        >
-          <h3>Type your email addres below to restore password:</h3>
-          <TextField
-            onChange={this.emailHandler}
-            name={'email'}
-            type={'email'}
-            hintText={'Type your email adress here'}
-            fullWidth={true}
-          />
-        </div>
+        <h3>Type your email addres below to restore password:</h3>
+        <TextField
+          fullWidth={true}
+          hintText={'Type your email adress here'}
+          inputStyle={{ color: '#0097A7' }}
+          onChange={this.emailHandler}
+          onKeyPress={(event) => {
+            if (event.key === 'Enter') {
+              this.props.restorePassword(this.state.email)
+            }
+          }}
+          name={'email'}
+          type={'email'}
+        />
         <RaisedButton
-          onClick={() => this.props.restorePassword(this.state.email)}
-          label={'Log in!'}
-          secondary={true}
           className={'button-margins'}
+          label={'Log in!'}
+          onClick={() => this.props.restorePassword(this.state.email)}
+          onKeyPress={(event) => {
+            if (event.key === 'Enter') {
+              this.props.restorePassword(this.state.email)
+            }
+          }}
+          secondary={true}
         />
       </div>
     )

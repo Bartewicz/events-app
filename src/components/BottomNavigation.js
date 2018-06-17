@@ -1,15 +1,14 @@
 import React from 'react'
 // UI
-import FontIcon from 'material-ui/FontIcon'
 import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation'
 import Paper from 'material-ui/Paper'
 import Restore from 'material-ui/svg-icons/action/restore'
 import Favorite from 'material-ui/svg-icons/action/favorite'
 import IconLocationOn from 'material-ui/svg-icons/communication/location-on'
 
-export default (props) => (
+export default () => (
   <div className={'fixed-bottom'}>
-    <Paper zDepth={1}>
+    <Paper>
       <BottomNavigation selectedIndex={1}>
         <BottomNavigationItem
           label="Recents"

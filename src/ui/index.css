@@ -4,6 +4,11 @@ body {
   font-family: sans-serif;
 }
 
+main {
+  margin-top: 60px;
+  margin-bottom: 56px;
+}
+
 #root, #app {
   height: 100%;
 }

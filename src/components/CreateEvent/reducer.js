@@ -1,5 +1,6 @@
 import { database } from '../../firebase'
 import { handleSuccess, handleInternalError, handleExternalError } from '../Alerts/reducer'
+import { clearPlace } from '../Map/reducer'
 
 // Actions types
 const CREATE_EVENT = 'createEvent/CREATE_EVENT'
@@ -44,13 +45,18 @@ export default (state = initialState, action) => {
 export const addEventToFirebase = () => (dispatch, getState) => {
   if (getState().createEvent.newEventHeader.length >= 10 && getState().createEvent.newEventDescription) {
     const newEventKey = database.ref(`/events`).push().key
+    let user = getState().auth.user.displayName || getState().auth.user.email
     const newEvent = {
+      createdAt: Date.now(),
+      createdBy: user,
       header: getState().createEvent.newEventHeader,
       description: getState().createEvent.newEventDescription,
+      place: getState().maps.place.place_id
     }
     database.ref(`/events/${newEventKey}`)
       .set(newEvent)
       .then(() => dispatch(createEvent()))
+      .then(() => dispatch(clearPlace()))
       .then(() => dispatch(handleSuccess('Great! Your event was succesfully created!')))
       .catch(error => dispatch(handleExternalError(error)))
     } else if (0 < getState().createEvent.newEventHeader < 10) {
