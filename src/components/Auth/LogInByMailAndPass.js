@@ -25,6 +25,11 @@ class LogInByMailAndPass extends React.Component {
           hintText={'Type your email adress here'}
           name={'email'}
           onChange={this.emailHandler}
+          onKeyPress={(event) => {
+            if (event.key === 'Enter') {
+              this.props.logInByMailAndPass(this.state.email, this.state.password)
+            }
+          }}
           type={'email'}
         />
         <TextField
@@ -32,6 +37,11 @@ class LogInByMailAndPass extends React.Component {
           hintText={'Type your password here'}
           name={'password'}
           onChange={this.passwordHandler}
+          onKeyPress={(event) => {
+            if (event.key === 'Enter') {
+              this.props.logInByMailAndPass(this.state.email, this.state.password)
+            }
+          }}
           type={'password'}
         />
         <span
@@ -42,8 +52,12 @@ class LogInByMailAndPass extends React.Component {
         </span>
         <RaisedButton
           className={'button-margins'}
-          label={'Sign up and log in!'}
+          label={'Log in!'}
           onClick={() => this.props.logInByMailAndPass(this.state.email, this.state.password)}
+          onKeyPress={(event) => {
+            if (event.key === 'Enter') {
+            this.props.logInByMailAndPass(this.state.email, this.state.password)
+          }}}
           secondary={true}
         />
       </div>

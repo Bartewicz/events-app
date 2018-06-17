@@ -32,11 +32,11 @@ class Auth extends React.Component {
           this.props.isUserLoggedIn ?
             this.props.children
             :
-            <div>
+            <main>
               <AppBar />
               <PaperRefined centered>
                 <div className={'auth-wrapper'}>
-                  <h3>Welcome to</h3>
+                  <h3 className={'no-margin-top'}>Welcome to</h3>
                   <img className={'logo-big'} src={logoBig} alt={'Logo'} />
                   <h1>Eve</h1>
                   <h3 className={'no-margin-top'}>
@@ -92,7 +92,7 @@ class Auth extends React.Component {
                   }
                 </div>
               </PaperRefined>
-            </div>
+            </main>
         }
       </div>
     )

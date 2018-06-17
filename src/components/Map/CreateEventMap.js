@@ -24,7 +24,6 @@ class Map extends React.Component {
 
     map.addListener('click', (event) => {
       if (event) {
-        // console.log(event)
         let location = { lat: event.latLng.lat(), lng: event.latLng.lng() }
         marker.setVisible(true)
         marker.setPosition(location)

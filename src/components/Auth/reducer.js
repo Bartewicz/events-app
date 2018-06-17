@@ -46,7 +46,6 @@ export const initAuthUserSync = () => (dispatch, getState) => {
         dispatch(handleSuccess('You were successfully logged in :)'))
       } else {
         dispatch(loggedOut())
-        dispatch(handleSuccess('You were logged out :) See you next time!'))
       }
     }
   )

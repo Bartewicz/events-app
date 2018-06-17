@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { clearError } from './components/Alerts/reducer'
 // Components
+import Auth from './components/Auth'
 import AppBar from './components/AppBar'
 import Snackbar from 'material-ui/Snackbar'
 // UI
@@ -14,16 +15,24 @@ class App extends Component {
   render() {
     return (
       <div>
-        <AppBar />
-        <CreateEvent />
+        <Auth>
+          <AppBar />
+          <CreateEvent />
+          <BottomNavigation />
+        </Auth>
         <Snackbar
+          className={'snackbar'}
           autoHideDuration={4000}
           open={this.props.imWithAlert}
           message={this.props.alert}
-          bodyStyle={{ backgroundColor: "gray", textAlign: 'center' }}
+          bodyStyle={{
+            backgroundColor: "gray",
+            textAlign: 'center',
+            borderRadius: '10px 10px 0 0',
+            marginBottom: this.props.isUserLoggedIn ? '56px' : '0'
+          }}
           onRequestClose={this.props.clearError}
         />
-        <BottomNavigation />
       </div>
     )
   }
@@ -31,6 +40,7 @@ class App extends Component {
 
 export default connect(
   state => ({
+    isUserLoggedIn: state.auth.isUserLoggedIn,
     imWithAlert: state.alerts.imWithAlert,
     alert: state.alerts.alert
   }),
