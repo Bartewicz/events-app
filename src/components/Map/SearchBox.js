@@ -11,13 +11,22 @@ class SearchBox extends React.Component {
 
     input.addListener('place_changed', () => {
       if (input.getPlace().geometry) {
-        let location = input.getPlace()
-        console.log(location)
-        if (location.name) {
-          this.props.setPlaceFromAutocomplete(location)
-        } else {
-          this.props.clearPlace(location)
-        }
+        let place = input.getPlace()
+        console.log(place)
+        if (place.name) {
+          let location = {
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng()
+          }
+          this.props.map.panTo(location)
+
+          this.props.marker.setPosition(location)
+          this.props.marker.setVisible(true)
+
+          this.props.setPlaceFromAutocomplete(place)
+        } else { }
+      } else {
+        this.props.clearPlace()
       }
     })
   }

@@ -48,7 +48,7 @@ export const addEventToFirebase = () => (dispatch, getState) => {
     const newEvent = {
       header: getState().createEvent.newEventHeader,
       description: getState().createEvent.newEventDescription,
-      place: getState().maps.place
+      place: getState().maps.place.place_id
     }
     database.ref(`/events/${newEventKey}`)
       .set(newEvent)

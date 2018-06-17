@@ -28,6 +28,8 @@ class Map extends React.Component {
         marker.setVisible(true)
         marker.setPosition(location)
 
+        map.panTo(location)
+
         this.props.setPlaceOnMapClick(location)
       }
     })
