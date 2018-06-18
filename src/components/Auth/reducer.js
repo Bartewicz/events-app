@@ -1,4 +1,6 @@
+// Firebase
 import { auth, database, googleProvider } from '../../firebase'
+// Reducers
 import { handleSuccess, handleInternalError, handleExternalError } from '../Alerts/reducer'
 
 // ACTIONS TYPES

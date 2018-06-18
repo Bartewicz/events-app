@@ -65,7 +65,7 @@ class CreateEvent extends React.Component {
                 <TextField
                   fullWidth={true}
                   hintText={'Type a description here'}
-                  inputStyle={{ color: '#0097A7' }}
+                  textareaStyle={{ color: '#0097A7' }}
                   multiLine={true}
                   name={'new-event'}
                   onChange={this.props.onNewDescChange}

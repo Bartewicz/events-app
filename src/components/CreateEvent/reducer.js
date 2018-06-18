@@ -1,4 +1,8 @@
+// Firebase
 import { database } from '../../firebase'
+// Moment
+import Moment from 'moment'
+// Reducers
 import { handleSuccess, handleInternalError, handleExternalError } from '../Alerts/reducer'
 import { clearPlace } from '../Map/reducer'
 
@@ -43,15 +47,21 @@ export default (state = initialState, action) => {
 
 // Logic
 export const addEventToFirebase = () => (dispatch, getState) => {
-  if (getState().createEvent.newEventHeader.length >= 10 && getState().createEvent.newEventDescription) {
+  const createdAt = Date.now()
+  const createdBy = getState().auth.user.uid
+  const description = getState().createEvent.newEventDescription
+  const header = getState().createEvent.newEventHeader
+  const place = getState().maps.place.place_id || {}
+  if (!place.formatted_address) {
+      dispatch(handleInternalError("You need to specify a location!"))
+  } else if (getState().createEvent.newEventHeader.length >= 10 && getState().createEvent.newEventDescription) {
     const newEventKey = database.ref(`/events`).push().key
-    let user = getState().auth.user.displayName || getState().auth.user.email
     const newEvent = {
-      createdAt: Date.now(),
-      createdBy: user,
-      header: getState().createEvent.newEventHeader,
-      description: getState().createEvent.newEventDescription,
-      place: getState().maps.place.place_id
+      createdAt,
+      createdBy,
+      description,
+      header,
+      place
     }
     database.ref(`/events/${newEventKey}`)
       .set(newEvent)
@@ -59,13 +69,13 @@ export const addEventToFirebase = () => (dispatch, getState) => {
       .then(() => dispatch(clearPlace()))
       .then(() => dispatch(handleSuccess('Great! Your event was succesfully created!')))
       .catch(error => dispatch(handleExternalError(error)))
-    } else if (0 < getState().createEvent.newEventHeader < 10) {
-      dispatch(handleInternalError('Your title must be at least 10 characters long.'))
-  } else if (!getState().createEvent.newEventHeader) {
+  } else if (0 < header < 10) {
+    dispatch(handleInternalError('Your title must be at least 10 characters long.'))
+  } else if (!header) {
     dispatch(handleInternalError('You need to add a title!'))
-  } else if (!getState().createEvent.newEventDescription) {
+  } else if (!description) {
     dispatch(handleInternalError("You need to add a description!"))
   } else {
-    dispatch(handleInternalError('Something went wrong'))
+    dispatch(handleInternalError('Something went wrong...'))
   }
 }
