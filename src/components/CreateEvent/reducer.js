@@ -1,7 +1,5 @@
 // Firebase
 import { database } from '../../firebase'
-// Moment
-import Moment from 'moment'
 // Reducers
 import { handleSuccess, handleInternalError, handleExternalError } from '../Alerts/reducer'
 import { clearPlace } from '../Map/reducer'

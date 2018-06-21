@@ -10,7 +10,7 @@ import * as mapLogic from '../Map/logic'
 // Material-ui
 import PaperRefined from '../../ui/PaperRefined'
 import { TextField, RaisedButton } from 'material-ui'
-import SearchBox from '../Map/SearchBox';
+import SearchBox from '../Map/SearchBox'
 
 class CreateEvent extends React.Component {
   state = {
