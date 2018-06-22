@@ -36,6 +36,5 @@ export const getEventsFromDB = () => (dispatch, getState) => {
           ))
         )
       dispatch(setEvents(events))
-      console.log(events)
     })
 }

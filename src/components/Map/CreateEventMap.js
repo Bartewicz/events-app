@@ -23,15 +23,15 @@ class Map extends React.Component {
 
     const service = new window.google.maps.places.PlacesService(map)
 
-    service.getDetails({
-      placeId: 'ChIJYUAVHhRXIkcRX-no9nruKFU'
-    }, (place, status) => {
-      if (status == window.google.maps.places.PlacesServiceStatus.OK) {
-        console.log('Your place, my lord', place)
-        } else {
-          console.log(status)
-      }
-    })
+    // service.getDetails({
+    //   placeId: 'ChIJYUAVHhRXIkcRX-no9nruKFU'
+    // }, (place, status) => {
+    //   if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+    //     console.log('Your place, my lord', place)
+    //     } else {
+    //       console.log(status)
+    //   }
+    // })
 
     map.addListener('click', (event) => {
       if (event) {
