@@ -108,7 +108,7 @@
   }
 }
 
-/* BottomNavigation */
+/* <-- BottomNavigation --> */
 
 .fixed-bottom {
   position: fixed;
@@ -142,7 +142,7 @@
   color: #606060;
 }
 
-.text-gray {
+.text-colorized {
   color: #0097A7;
 }
 
@@ -166,6 +166,11 @@
 }
 
 /* <-- Dashboard --> */
+
+div[id^="map-"] {
+  width: 100%;
+  height: 250px;
+}
 
 /* <-- Auth --> */
 

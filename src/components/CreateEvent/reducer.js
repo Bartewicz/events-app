@@ -52,14 +52,24 @@ export const addEventToFirebase = () => (dispatch, getState) => {
   }
   const description = getState().createEvent.newEventDescription
   const header = getState().createEvent.newEventHeader
-  const place = getState().maps.place.place_id || {}
+  const place = {
+    location: {
+      lat: getState().maps.place.geometry.location.lat(),
+      lng: getState().maps.place.geometry.location.lng()
+    },
+    formatted_address: getState().maps.place.formatted_address,
+    place_id: getState().maps.place.place_id
+  } || {}
   if (getState().auth.user.displayName) {
     createdBy.displayName = getState().auth.user.displayName
   }
   if (getState().auth.user.photoURL) {
     createdBy.photoURL = getState().auth.user.photoURL
   }
-  if (!place.length) {
+  if (getState().maps.place.name) {
+    place.name = getState().maps.place.name
+  }
+  if (!place.place_id) {
     dispatch(handleInternalError("You need to specify a location!"))
   } else if (!header) {
     dispatch(handleInternalError('You need to add a title!'))
