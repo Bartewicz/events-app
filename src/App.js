@@ -9,8 +9,8 @@ import Snackbar from 'material-ui/Snackbar'
 // UI
 import './ui/App.css'
 import BottomNavigation from './components/BottomNavigation'
-import CreateEvent from './components/CreateEvent/CreateEvent'
-import Dashboard from './components/Dashboard'
+import CreateEvent from './components/CreateEvent/'
+import Dashboard from './components/Dashboard/'
 
 class App extends Component {
   render() {
