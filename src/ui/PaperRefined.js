@@ -5,9 +5,9 @@ import { Paper } from 'material-ui'
 const PaperRefined = (props) => (
   <Paper className={
     props.centered ?
-      'paper flex-center text-center'
+      `paper flex-center text-center ${props.className}`
       :
-      'paper'
+      `paper ${props.className}`
   }>
     {props.children}
   </Paper>

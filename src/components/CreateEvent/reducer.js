@@ -1,7 +1,5 @@
 // Firebase
 import { database } from '../../firebase'
-// Moment
-import Moment from 'moment'
 // Reducers
 import { handleSuccess, handleInternalError, handleExternalError } from '../Alerts/reducer'
 import { clearPlace } from '../Map/reducer'
@@ -48,12 +46,37 @@ export default (state = initialState, action) => {
 // Logic
 export const addEventToFirebase = () => (dispatch, getState) => {
   const createdAt = Date.now()
-  const createdBy = getState().auth.user.uid
+  const createdBy = {
+    email: getState().auth.user.email,
+    uid: getState().auth.user.uid
+  }
   const description = getState().createEvent.newEventDescription
   const header = getState().createEvent.newEventHeader
-  const place = getState().maps.place.place_id || {}
-  if (!place.formatted_address) {
-      dispatch(handleInternalError("You need to specify a location!"))
+  const place = {
+    location: {
+      lat: getState().maps.place.geometry.location.lat(),
+      lng: getState().maps.place.geometry.location.lng()
+    },
+    formatted_address: getState().maps.place.formatted_address,
+    place_id: getState().maps.place.place_id
+  } || {}
+  if (getState().auth.user.displayName) {
+    createdBy.displayName = getState().auth.user.displayName
+  }
+  if (getState().auth.user.photoURL) {
+    createdBy.photoURL = getState().auth.user.photoURL
+  }
+  if (getState().maps.place.name) {
+    place.name = getState().maps.place.name
+  }
+  if (!place.place_id) {
+    dispatch(handleInternalError("You need to specify a location!"))
+  } else if (!header) {
+    dispatch(handleInternalError('You need to add a title!'))
+  } else if (header.length < 10) {
+    dispatch(handleInternalError('Your title must be at least 10 characters long.'))
+  } else if (!description) {
+    dispatch(handleInternalError("You need to add a description!"))
   } else if (getState().createEvent.newEventHeader.length >= 10 && getState().createEvent.newEventDescription) {
     const newEventKey = database.ref(`/events`).push().key
     const newEvent = {
@@ -69,12 +92,6 @@ export const addEventToFirebase = () => (dispatch, getState) => {
       .then(() => dispatch(clearPlace()))
       .then(() => dispatch(handleSuccess('Great! Your event was succesfully created!')))
       .catch(error => dispatch(handleExternalError(error)))
-  } else if (0 < header < 10) {
-    dispatch(handleInternalError('Your title must be at least 10 characters long.'))
-  } else if (!header) {
-    dispatch(handleInternalError('You need to add a title!'))
-  } else if (!description) {
-    dispatch(handleInternalError("You need to add a description!"))
   } else {
     dispatch(handleInternalError('Something went wrong...'))
   }

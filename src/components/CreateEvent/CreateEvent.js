@@ -10,7 +10,7 @@ import * as mapLogic from '../Map/logic'
 // Material-ui
 import PaperRefined from '../../ui/PaperRefined'
 import { TextField, RaisedButton } from 'material-ui'
-import SearchBox from '../Map/SearchBox';
+import SearchBox from '../Map/SearchBox'
 
 class CreateEvent extends React.Component {
   state = {
@@ -34,7 +34,7 @@ class CreateEvent extends React.Component {
                   <h3 className={'section-title display-inline no-margins'}>
                     Created by:
                     </h3>
-                  <h3 className={'display-inline no-margins text-gray'}>
+                  <h3 className={'display-inline no-margins text-colorized'}>
                     {
                       this.props.user.displayName ?
                         this.props.user.displayName
@@ -43,68 +43,85 @@ class CreateEvent extends React.Component {
                     }
                   </h3>
                 </div>
-                <h3 className={'section-title no-margins'}>Localization:</h3>
-                <div className={'flex-center'}>
-                  <span className={'event-location text-gray'}>{this.props.place.formatted_address}</span>
-                </div>
-                <h3 className={'section-title text-left no-margins'}>Title:</h3>
-                <br />
-                <TextField
-                  fullWidth={true}
-                  hintText={'Type a title of your event here'}
-                  inputStyle={{ color: '#0097A7' }}
-                  name={'new-event'}
-                  onChange={this.props.onNewHeaderChange}
-                  value={this.props.newEventHeader}
-                />
-              </div>
-              <hr />
-              <div>
-                <h3 className={'section-title text-left no-margins'}>Description:</h3>
-                <br />
-                <TextField
-                  fullWidth={true}
-                  hintText={'Type a description here'}
-                  textareaStyle={{ color: '#0097A7' }}
-                  multiLine={true}
-                  name={'new-event'}
-                  onChange={this.props.onNewDescChange}
-                  value={this.props.newEventDescription}
-                />
-              </div>
-            </div>
-            <div className={'wrapper'}>
-              <h3 className={'section-title no-margins'}>
-                Specify location:
-              </h3>
-              <div className={'searchBox-wrapper'}>
-                <SearchBox
-                  onPlacesChanged={(place) => mapLogic.onPlacesChanged(place, this)}
-                  map={this.state.map}
-                  marker={this.state.marker}
-                />
-              </div>
-              <Map
-                context={this}
-                setRefToMap={(map) => mapLogic.setRefToMap(map, this)}
-                setRefToMarker={(marker) => mapLogic.setRefToMarker(marker, this)}
-              />
-            </div>
-          </div>
-          <br />
-          <div className={'event-add-button-wrapper'}>
-            <div className={'auth-wrapper'}>
-              <RaisedButton
-                className={'button-margins'}
+                <h3 className={'section-title no-margins'}>
+                  Localization:
+                </h3>
+                {
+                  this.props.place.name ?
+                    <div className={'flex-center'}>
+                      <p className={'event-location text-colorized'}>
+                        {this.props.place.name},
+                      </p>
+                      <br />
+                      <p className={'event-location text-colorized'}>
+                        {this.props.place.formatted_address}
+                      </p>
+                    </div>
+                    :
+                    <div className={'flex-center'}>
+                      <p className={'event-location text-colorized'}>
+                        {this.props.place.formatted_address}
+                      </p>
+                    </div>
+                }
+              <h3 className={'section-title text-left no-margins'}>Title:</h3>
+              <br />
+              <TextField
                 fullWidth={true}
-                label={<b>Let's make it happen!</b>}
-                onClick={this.props.onEventAdd}
-                primary={true}
+                hintText={'Type a title of your event here'}
+                inputStyle={{ color: '#0097A7' }}
+                name={'new-event'}
+                onChange={this.props.onNewHeaderChange}
+                value={this.props.newEventHeader}
+              />
+            </div>
+            <hr />
+            <div>
+              <h3 className={'section-title text-left no-margins'}>Description:</h3>
+              <br />
+              <TextField
+                fullWidth={true}
+                hintText={'Type a description here'}
+                textareaStyle={{ color: '#0097A7' }}
+                multiLine={true}
+                name={'new-event'}
+                onChange={this.props.onNewDescChange}
+                value={this.props.newEventDescription}
               />
             </div>
           </div>
+          <div className={'wrapper'}>
+            <h3 className={'section-title no-margins'}>
+              Specify location:
+              </h3>
+            <div className={'searchBox-wrapper'}>
+              <SearchBox
+                onPlacesChanged={(place) => mapLogic.onPlacesChanged(place, this)}
+                map={this.state.map}
+                marker={this.state.marker}
+              />
+            </div>
+            <Map
+              context={this}
+              setRefToMap={(map) => mapLogic.setRefToMap(map, this)}
+              setRefToMarker={(marker) => mapLogic.setRefToMarker(marker, this)}
+            />
+          </div>
+          </div>
+        <br />
+        <div className={'event-add-button-wrapper'}>
+          <div className={'auth-wrapper'}>
+            <RaisedButton
+              className={'button-margins'}
+              fullWidth={true}
+              label={<b>Let's make it happen!</b>}
+              onClick={this.props.onEventAdd}
+              primary={true}
+            />
+          </div>
+        </div>
         </PaperRefined>
-      </main>
+      </main >
     )
   }
 }

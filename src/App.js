@@ -9,7 +9,8 @@ import Snackbar from 'material-ui/Snackbar'
 // UI
 import './ui/App.css'
 import BottomNavigation from './components/BottomNavigation'
-import CreateEvent from './components/CreateEvent/CreateEvent'
+import CreateEvent from './components/CreateEvent/'
+import Dashboard from './components/Dashboard/'
 
 class App extends Component {
   render() {
@@ -18,6 +19,7 @@ class App extends Component {
         <Auth>
           <AppBar />
           <CreateEvent />
+          <Dashboard />
           <BottomNavigation />
         </Auth>
         <Snackbar
