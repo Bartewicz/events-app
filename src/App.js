@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 // Redux
 import { connect } from 'react-redux'
 import { clearError } from './components/Alerts/reducer'
@@ -17,10 +18,22 @@ class App extends Component {
     return (
       <div>
         <Auth>
-          <AppBar />
-          <CreateEvent />
-          <Dashboard />
-          <BottomNavigation />
+          <Router>
+            <div>
+              <AppBar
+                pathname={this.props.match}
+              />
+              <Route exact strict
+                path={'/'}
+                component={Dashboard}
+              />
+              <Route exact
+                path={'/create-event'}
+                component={CreateEvent}
+              />
+              <BottomNavigation />
+            </div>
+          </Router>
         </Auth>
         <Snackbar
           className={'snackbar'}
