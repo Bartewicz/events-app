@@ -13,18 +13,19 @@ const Nav = (props) => (
   <div>
     <IconMenu
       iconButtonElement={<IconButton><Menu color={"white"}/></IconButton>}
-      onChange={props.handleChangeSingle}
-      value={props.valueSingle}
       anchorOrigin={{ "horizontal": "left", "vertical": "bottom" }}
       targetOrigin={{ "horizontal": "right", "vertical": "top" }}
     >
-      <MenuItem value="1" primaryText="Home" />
-      <MenuItem value="2" primaryText="Events nearby" />
-      <MenuItem value="3" primaryText="Your events" />
+      <MenuItem primaryText="Dashboard" />
+      <MenuItem primaryText="Upcoming events" />
+      <MenuItem primaryText="Events nearby" />
       <Divider />
-      <MenuItem value="4" primaryText="Help" />
+      <MenuItem primaryText="Create event" />
       <Divider />
-      <MenuItem value="5" primaryText="Log out" />
+      <MenuItem
+        primaryText="Log out"
+        onClick={props.onLogOutClick}
+      />
     </IconMenu>
   </div >
 )
