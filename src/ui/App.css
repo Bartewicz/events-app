@@ -115,6 +115,14 @@
 
 /* <-- BottomNavigation --> */
 
+.bottom-nav {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: #fff;
+  border-top: 1px solid #606060
+}
+
 .fixed-bottom {
   position: fixed;
   bottom: 0;
@@ -124,15 +132,9 @@
   z-index: 10000;
 }
 
-.medium-icon {
-  color: white;
-  width: 24;
-  height: 24;
-}
-
-.medium {
-  width: 36;
-  height: 48;
+.active * {
+  fill: rgba(0, 151, 167, 0.75) !important;
+  color: #0097A7 !important;
 }
 
 /* <-- CreateEvent --> */
@@ -165,7 +167,6 @@
 
 @media screen and (min-width: 430px) {
   .add-event-wrapper {
-    flex-direction: row;
     justify-content: space-between;
   }
 }
