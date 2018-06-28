@@ -52,19 +52,20 @@ export const addEventToFirebase = () => (dispatch, getState) => {
   }
   const description = getState().createEvent.newEventDescription
   const header = getState().createEvent.newEventHeader
-  const place = {
-    location: {
-      lat: getState().maps.place.geometry.location.lat(),
-      lng: getState().maps.place.geometry.location.lng()
-    },
-    formatted_address: getState().maps.place.formatted_address,
-    place_id: getState().maps.place.place_id
-  } || {}
+  const place = {}
   if (getState().auth.user.displayName) {
     createdBy.displayName = getState().auth.user.displayName
   }
   if (getState().auth.user.photoURL) {
     createdBy.photoURL = getState().auth.user.photoURL
+  }
+  if (getState().maps.place.geometry) {
+    place.location = {
+      lat: getState().maps.place.geometry.location.lat(),
+      lng: getState().maps.place.geometry.location.lng()
+    }
+    place.formatted_address = getState().maps.place.formatted_address
+    place.place_id = getState().maps.place.place_id
   }
   if (getState().maps.place.name) {
     place.name = getState().maps.place.name
