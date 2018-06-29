@@ -9,16 +9,16 @@ import IconLocationOn from 'material-ui/svg-icons/communication/location-on'
 
 export default () => (
   <div className={'bottom-nav fixed-bottom'}>
-    <NavLink
+    {/* <NavLink
       to={'/upcoming'}
       className={'link'}
       activeClassName={'active'}
-    >
+    > */}
       <BottomNavigationItem
         label="Upcoming"
         icon={<Restore />}
       />
-    </NavLink>
+    {/* </NavLink> */}
     <NavLink exact strict
       to={'/'}
       className={'link'}
@@ -29,15 +29,15 @@ export default () => (
         icon={<Favorite />}
       />
     </NavLink>
-    <NavLink
+    {/* <NavLink
       to={'/nearby'}
       className={'link'}
       activeClassName={'active'}
-    >
+    > */}
       <BottomNavigationItem
         label="Nearby"
         icon={<IconLocationOn />}
       />
-    </NavLink>
+    {/* </NavLink> */}
   </div>
 )
