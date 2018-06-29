@@ -74,8 +74,12 @@ export const addEventToFirebase = () => (dispatch, getState) => {
     email: getState().auth.user.email,
     uid: getState().auth.user.uid
   }
-  const description = getState().createEvent.newEventDescription
-  const header = getState().createEvent.newEventHeader
+  const description =
+    String(getState().createEvent.newEventDescription.charAt(0).toUpperCase()) +
+    String(getState().createEvent.newEventDescription.substr(1))
+  const header =
+    String(getState().createEvent.newEventHeader.charAt(0).toUpperCase()) +
+    String(getState().createEvent.newEventHeader.substr(1))
   const place = {}
   const timestamp = {
     date: getState().createEvent.newEventDate,
