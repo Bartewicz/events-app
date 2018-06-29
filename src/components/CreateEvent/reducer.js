@@ -77,6 +77,10 @@ export const addEventToFirebase = () => (dispatch, getState) => {
   const description = getState().createEvent.newEventDescription
   const header = getState().createEvent.newEventHeader
   const place = {}
+  const timestamp = {
+    date: getState().createEvent.newEventDate,
+    wholeDay: getState().createEvent.wholeDay
+  }
   if (getState().auth.user.displayName) {
     createdBy.displayName = getState().auth.user.displayName
   }
@@ -94,10 +98,17 @@ export const addEventToFirebase = () => (dispatch, getState) => {
   if (getState().maps.place.name) {
     place.name = getState().maps.place.name
   }
-  if (!place.place_id) {
-    dispatch(handleInternalError("You need to specify a location!"))
+  if (!getState().createEvent.wholeDay && getState().createEvent.newEventTime) {
+    timestamp.time = getState().createEvent.newEventTime
+  }
+  if (!getState().createEvent.newEventDate) {
+    dispatch(handleInternalError("Specify a date first."))
+  } else if (!getState().createEvent.wholeDay && !getState().createEvent.newEventTime) {
+    dispatch(handleInternalError("Specify a time or mark as a whole day."))
+  } else if (!place.place_id) {
+    dispatch(handleInternalError("Specify a location."))
   } else if (!header) {
-    dispatch(handleInternalError('You need to add a title!'))
+    dispatch(handleInternalError('You need to add a title. Remember:\nYour title must be at least 10 characters long.'))
   } else if (header.length < 10) {
     dispatch(handleInternalError('Your title must be at least 10 characters long.'))
   } else if (!description) {
@@ -109,7 +120,8 @@ export const addEventToFirebase = () => (dispatch, getState) => {
       createdBy,
       description,
       header,
-      place
+      place,
+      timestamp
     }
     database.ref(`/events/${newEventKey}`)
       .set(newEvent)

@@ -54,11 +54,9 @@ class CreateEvent extends React.Component {
                 {
                   this.props.place.name ?
                     <div className={'flex-center'}>
-                      <p className={'event-location text-colorized'}>
-                        {this.props.place.name},
-                      </p>
-                      <br />
-                      <p className={'event-location text-colorized'}>
+                      <p className={'event-location text-center text-colorized'}>
+                        {this.props.place.name}
+                        <br />
                         {this.props.place.formatted_address}
                       </p>
                     </div>

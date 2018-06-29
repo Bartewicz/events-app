@@ -47,6 +47,18 @@
   justify-content: space-between;
 }
 
+.align-center {
+  align-self: center;
+}
+
+.align-flex-start {
+  align-self: flex-start;
+}
+
+.align-flex-end {
+  align-self: flex-end;
+}
+
 .button-margins {
   margin: 0.5rem 0;
 }
@@ -61,6 +73,10 @@
 
 .no-margin-top {
   margin-top: 0;
+}
+
+.mb-05 {
+  margin-bottom: 0.5rem;
 }
 
 /* PaperRefined */
@@ -190,18 +206,6 @@ div[id^="map-"] {
   flex-flow: column nowrap;
   flex-grow: 1;
   width: 300px;
-}
-
-.align-center {
-  align-self: center;
-}
-
-.align-left {
-  align-self: flex-start;
-}
-
-.align-right {
-  align-self: flex-end;
 }
 
 @media screen and (min-width: 420px) {
