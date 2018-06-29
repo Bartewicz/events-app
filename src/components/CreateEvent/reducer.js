@@ -1,5 +1,7 @@
 // Firebase
 import { database } from '../../firebase'
+// Moment
+import Moment from 'moment'
 // Reducers
 import { handleSuccess, handleInternalError, handleExternalError } from '../Alerts/reducer'
 import { clearPlace } from '../Map/reducer'
@@ -74,8 +76,12 @@ export const addEventToFirebase = () => (dispatch, getState) => {
     email: getState().auth.user.email,
     uid: getState().auth.user.uid
   }
-  const description = getState().createEvent.newEventDescription
-  const header = getState().createEvent.newEventHeader
+  const description =
+    String(getState().createEvent.newEventDescription.charAt(0).toUpperCase()) +
+    String(getState().createEvent.newEventDescription.substr(1))
+  const header =
+    String(getState().createEvent.newEventHeader.charAt(0).toUpperCase()) +
+    String(getState().createEvent.newEventHeader.substr(1))
   const place = {}
   const timestamp = {
     date: getState().createEvent.newEventDate,
@@ -103,6 +109,10 @@ export const addEventToFirebase = () => (dispatch, getState) => {
   }
   if (!getState().createEvent.newEventDate) {
     dispatch(handleInternalError("Specify a date first."))
+  } else if (!Moment(getState().createEvent.newEventDate, 'YYYYMMDD').isValid) {
+    dispatch(handleInternalError("A date is invalid.\nCorrect date and try again."))
+  } else if (!Moment(getState().createEvent.newEventTime, 'HH:mmZ').isValid) {
+    dispatch(handleInternalError("A time is invalid.\nCorrect time or mark as whole day and try again."))
   } else if (!getState().createEvent.wholeDay && !getState().createEvent.newEventTime) {
     dispatch(handleInternalError("Specify a time or mark as a whole day."))
   } else if (!place.place_id) {
