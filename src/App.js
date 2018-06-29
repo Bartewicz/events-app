@@ -42,9 +42,15 @@ class App extends Component {
           message={this.props.alert}
           bodyStyle={{
             backgroundColor: "gray",
+            height: 'auto',
+            whiteSpace: 'pre-line',
             textAlign: 'center',
             borderRadius: '10px 10px 0 0',
+            padding: '12px',
             marginBottom: this.props.isUserLoggedIn ? '56px' : '0'
+          }}
+          contentStyle={{
+            lineHeight: '24px'
           }}
           onRequestClose={this.props.clearError}
         />
