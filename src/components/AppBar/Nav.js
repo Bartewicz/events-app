@@ -29,26 +29,28 @@ class Nav extends React.Component {
               primaryText={'Dashboard'}
             />
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to={'/upcoming'}
             className={'link'}
             activeStyle={{ color: '#0097A7' }}
-          >
-            <MenuItem
-              className={'menu-item'}
-              primaryText="Upcoming events"
-            />
-          </NavLink>
-          <NavLink
+          > */}
+          <MenuItem
+            disabled={true}
+            className={'menu-item'}
+            primaryText="Upcoming events"
+          />
+          {/* </NavLink> */}
+          {/* <NavLink
             to={'/nearby'}
             className={'link'}
             activeStyle={{ color: '#0097A7' }}
-          >
-            <MenuItem
-              className={'menu-item'}
-              primaryText="Events nearby"
-            />
-          </NavLink>
+          > */}
+          <MenuItem
+            disabled={true}
+            className={'menu-item'}
+            primaryText="Events nearby"
+          />
+          {/* </NavLink> */}
           <Divider />
           <NavLink
             to={'/create-event'}
