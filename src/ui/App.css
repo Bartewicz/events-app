@@ -79,6 +79,15 @@
   margin-bottom: 0.5rem;
 }
 
+.mt-05 {
+  margin-top: 0.5rem;
+}
+
+.mx-05 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
 /* PaperRefined */
 
 .paper {

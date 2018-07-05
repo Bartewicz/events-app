@@ -16,11 +16,12 @@ const Dashboard = (props) => (
       <div className={'dashboard'}>
         {
           props.events.length ?
-            props.events.map((event, index) =>
-              <EventCard
-                event={event}
-                key={index}
-              />
+            props.events.map((event, index) => 
+                <EventCard
+                  event={event}
+                  key={index}
+                  user={props.user}
+                />
             )
             :
             'Loading events...'
