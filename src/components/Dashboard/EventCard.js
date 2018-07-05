@@ -91,8 +91,16 @@ const EventCard = (props) => (
         {
           props.event.createdBy.uid === props.user.uid ?
             <div className={'text-right mt-05'}>
-              <button className={'mx-05'}>Edit</button>
-              <button onClick={() => props.deleteEventFromDB(props.event)}>Delete</button>
+              <button className={'mx-05'}
+                onClick={() => props.actionHandler('edit', props.event)}
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => props.actionHandler('delete', props.event)}
+              >
+                Delete
+              </button>
             </div>
             :
             null

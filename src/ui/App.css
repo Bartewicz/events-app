@@ -88,6 +88,34 @@
   margin-right: 0.5rem;
 }
 
+/* Dialog */
+
+.dialog {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.dialog.visible {
+  display: flex;
+  opacity: 1;
+}
+
+.dialog-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.dialog-wrapper {
+  height: auto;
+  width: auto;
+  background-color: #fff;
+}
+
 /* PaperRefined */
 
 .paper {

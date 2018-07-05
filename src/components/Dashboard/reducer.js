@@ -31,11 +31,12 @@ export default (state = initialState, action) => {
 
 // Logic
 
-export const getEventsFromDB = (event) => (dispatch, getState) => {
-  database.ref(`/events/${event.key}`)
-    .update(() => {
-      dispatch(editEvent())
-    })
+export const updateEventAtDB = (event) => (dispatch, getState) => {
+  // database.ref(`/events/${event.key}`)
+  //   .update(() => {
+  //     dispatch(editEvent())
+  //   })
+  dispatch(handleSuccess(`You succesfully edited event ${event.key}`))
 }
 
 export const deleteEventFromDB = (event) => (dispatch, getState) => {
