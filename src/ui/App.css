@@ -59,10 +59,6 @@
   align-self: flex-end;
 }
 
-.button-margins {
-  margin: 0.5rem 0;
-}
-
 .map-margins {
   margin: 10px;
 }
@@ -75,8 +71,77 @@
   margin-top: 0;
 }
 
+.no-margin-bottom {
+  margin-bottom: 0;
+}
+
 .mb-05 {
   margin-bottom: 0.5rem;
+}
+
+.mt-05 {
+  margin-top: 0.5rem;
+}
+
+.mx-05 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+/* Dialog */
+
+.dialog {
+  display: none;
+  opacity: 0;
+  z-index: 10000;
+}
+
+.active {
+  display: flex;
+  opacity: 1;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1
+  }
+}
+
+.hide {
+  opacity: 0;
+  animation: fadeOut 0.2s ease-in-out;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0
+  }
+}
+
+.dialog-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.dialog-wrapper {
+  display: flex;
+  flex-flow: column;
+  min-width: 300px;
+  padding: 1rem;
+  margin: auto;
+  border-radius: 0.25rem;
+  background-color: #fff;
 }
 
 /* PaperRefined */

@@ -1,4 +1,7 @@
 import React from 'react'
+// React-Redux
+import { connect } from 'react-redux'
+import { deleteEventFromDB } from './reducer'
 // Components
 import SingleEventMap from '../Map/SingleEventMap'
 // Moment
@@ -61,8 +64,8 @@ const EventCard = (props) => (
             </span>
         }
       </div>
-      <div>
-        <p className={'section-title text-right no-margins align-flex-end'}>
+      <div className={'align-flex-end'}>
+        <p className={'section-title text-right no-margins'}>
           {'created by: '}
           <span className={'text-colorized'}>
             <b>
@@ -85,6 +88,23 @@ const EventCard = (props) => (
             </b>
           </span>
         </p>
+        {
+          props.event.createdBy.uid === props.user.uid ?
+            <div className={'text-right mt-05'}>
+              <button className={'mx-05'}
+                onClick={() => props.actionHandler('edit', props.event)}
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => props.actionHandler('delete', props.event)}
+              >
+                Delete
+              </button>
+            </div>
+            :
+            null
+        }
       </div>
       <p>{props.event.description}</p>
       <SingleEventMap
@@ -95,4 +115,9 @@ const EventCard = (props) => (
   </PaperRefined >
 )
 
-export default EventCard
+export default connect(
+  state => ({}),
+  dispatch => ({
+    deleteEventFromDB: (event) => dispatch(deleteEventFromDB(event))
+  })
+)(EventCard)
