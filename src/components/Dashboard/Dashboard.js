@@ -4,21 +4,41 @@ import { connect } from 'react-redux'
 // UI
 import PaperRefined from '../../ui/PaperRefined'
 import EventCard from './EventCard'
-import Dialog from '../Dialog';
+import Dialog from '../Dialog'
 
 class Dashboard extends React.Component {
   state = {
-    isDialogOpen: false,
     dialogContext: '',
     dialogEvent: {}
   }
 
   eventActionHandler = (context, event) => {
-    this.setState({ isDialogOpen: true, dialogContext: context, dialogEvent: event })
+    const dialog = window.document.getElementById('dialog')
+    dialog.classList.add('active')
+    this.setState({ dialogContext: context, dialogEvent: event })
   }
 
   closeDialog = () => {
-    this.setState({ isDialogOpen: false, dialogContext: '', dialogEvent: {} })
+    const dialog = window.document.getElementById('dialog')
+    dialog.classList.add('hide')
+    setTimeout(() => {
+      dialog.classList.remove('active')
+      dialog.classList.remove('hide')
+      this.setState({ dialogContext: '', dialogEvent: {} })
+    }, 300)
+  }
+
+  completeRequest = () => {
+    const context = this.state.dialogContext
+    if (context === 'edit') {
+        alert('You try to edit this event\n' + this.state.dialogEvent.header)
+        this.closeDialog()
+    } else if (context === 'delete') {
+        alert('You try to delete this event\n' + this.state.dialogEvent.header)
+        this.closeDialog()
+    } else {
+      alert('error')
+    }
   }
 
   render() {
@@ -27,7 +47,7 @@ class Dashboard extends React.Component {
         <div className={'paper'}>
           <h1 className={'text-center no-margins'}>
             Dashboard
-      </h1>
+          </h1>
         </div>
         <PaperRefined>
           <div className={'dashboard'}>
@@ -52,6 +72,7 @@ class Dashboard extends React.Component {
           context={this.state.dialogContext}
           event={this.state.dialogEvent}
           onRequestClose={this.closeDialog}
+          onRequestComplete={this.completeRequest}
         />
       </main>
     )
