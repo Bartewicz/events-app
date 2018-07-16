@@ -144,6 +144,10 @@
   background-color: #fff;
 }
 
+.close-button {
+  cursor: pointer;
+}
+
 /* PaperRefined */
 
 .paper {

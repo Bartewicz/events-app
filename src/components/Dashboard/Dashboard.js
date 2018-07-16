@@ -1,6 +1,7 @@
 import React from 'react'
 // React-Redux
 import { connect } from 'react-redux'
+import { deleteEventFromDB } from './reducer'
 // UI
 import PaperRefined from '../../ui/PaperRefined'
 import EventCard from './EventCard'
@@ -28,14 +29,14 @@ class Dashboard extends React.Component {
     }, 300)
   }
 
-  completeRequest = () => {
+  completeRequest = (event) => {
     const context = this.state.dialogContext
     if (context === 'edit') {
-        alert('You try to edit this event\n' + this.state.dialogEvent.header)
-        this.closeDialog()
+      alert('You try to edit this event\n' + this.state.dialogEvent.header)
+      this.closeDialog()
     } else if (context === 'delete') {
-        alert('You try to delete this event\n' + this.state.dialogEvent.header)
-        this.closeDialog()
+      this.props.deleteEvent(event)
+      this.closeDialog()
     } else {
       alert('error')
     }
@@ -63,7 +64,6 @@ class Dashboard extends React.Component {
                 )
                 :
                 'Loading events...'
-
             }
           </div>
         </PaperRefined>
@@ -85,5 +85,6 @@ export default connect(
     user: state.auth.user
   }),
   dispatch => ({
+    deleteEvent: (event) => dispatch(deleteEventFromDB(event))
   })
 )(Dashboard)
