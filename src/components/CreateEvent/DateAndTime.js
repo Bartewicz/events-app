@@ -3,8 +3,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 // Reducer
 import { onDateChange, onTimeChange, toggleWholeDay } from '../Events/reducer'
-// Moment
-import Moment from 'moment'
 // Material ui
 import { DatePicker, TimePicker, Toggle } from 'material-ui'
 
@@ -63,12 +61,8 @@ export default connect(
     wholeDay: state.events.wholeDay,
   }),
   dispatch => ({
-    onDateChange: (value) => dispatch(onDateChange(
-      Moment(value).format('YYYYMMDD')
-    )),
-    onTimeChange: (value) => dispatch(onTimeChange(
-      Moment.utc(value).format('HH:mmZ')
-    )),
+    onDateChange: (value) => dispatch(onDateChange(value)),
+    onTimeChange: (value) => dispatch(onTimeChange(value)),
     toggleWholeDay: (value) => dispatch(toggleWholeDay(value))
   })
 )(DateAndTime)

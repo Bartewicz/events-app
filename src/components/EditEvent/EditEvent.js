@@ -3,6 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 // Reducer
 import {
+  editEvent,
   addEventToFirebase,
   onNewHeaderChange,
   onNewDescChange
@@ -20,13 +21,12 @@ import DateAndTime from './DateAndTime'
 class EditEvent extends React.Component {
   state = {
     map: null,
-    marker: null,
-    event: {}
+    marker: null
   }
 
   componentDidMount() {
     const event = this.props.events.filter(e => e.key === this.props.match.params.key)[0]
-    this.setState({ event })
+    this.props.editEvent(event)
   }
 
   render() {
@@ -34,7 +34,12 @@ class EditEvent extends React.Component {
       <main>
         <div className={'paper'}>
           <h1 className={'text-center no-margins'}>
-            Edit event: {this.state.event.header}
+            Edit event: {
+              this.props.newEventHeader ?
+                this.props.newEventHeader
+                :
+                null
+            }
           </h1>
         </div>
         <PaperRefined>
@@ -143,6 +148,7 @@ export default connect(
     place: state.maps.place
   }),
   dispatch => ({
+    editEvent: (event) => dispatch(editEvent(event)),
     onEventAdd: () => dispatch(addEventToFirebase()),
     onNewHeaderChange: (event, value) => dispatch(onNewHeaderChange(value)),
     onNewDescChange: (event, value) => dispatch(onNewDescChange(value))
