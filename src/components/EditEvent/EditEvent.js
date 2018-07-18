@@ -17,10 +17,17 @@ import { TextField, RaisedButton } from 'material-ui'
 import SearchBox from '../Map/SearchBox'
 import DateAndTime from './DateAndTime'
 
-class CreateEvent extends React.Component {
+class EditEvent extends React.Component {
   state = {
     map: null,
-    marker: null
+    marker: null,
+    event: {}
+  }
+
+  componentDidMount() {
+    const event = this.props.events.filter(e => e.key === this.props.match.params.key)[0]
+    console.log(event)
+    this.setState({ event })
   }
 
   render() {
@@ -28,7 +35,7 @@ class CreateEvent extends React.Component {
       <main>
         <div className={'paper'}>
           <h1 className={'text-center no-margins'}>
-            Create new event
+            Edit event: {this.state.event.header}
           </h1>
         </div>
         <PaperRefined>
@@ -130,6 +137,7 @@ class CreateEvent extends React.Component {
 
 export default connect(
   state => ({
+    events: state.events.events,
     user: state.auth.user,
     newEventHeader: state.events.newEventHeader,
     newEventDescription: state.events.newEventDescription,
@@ -140,4 +148,4 @@ export default connect(
     onNewHeaderChange: (event, value) => dispatch(onNewHeaderChange(value)),
     onNewDescChange: (event, value) => dispatch(onNewDescChange(value))
   })
-)(CreateEvent)
+)(EditEvent)

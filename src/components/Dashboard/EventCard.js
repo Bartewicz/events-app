@@ -1,7 +1,7 @@
 import React from 'react'
 // React-Redux
 import { connect } from 'react-redux'
-import { deleteEventFromDB } from './reducer'
+import { deleteEventFromDB } from '../Events/reducer'
 // Components
 import SingleEventMap from '../Map/SingleEventMap'
 // Moment

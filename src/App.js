@@ -12,6 +12,7 @@ import './ui/App.css'
 import BottomNavigation from './components/BottomNavigation'
 import CreateEvent from './components/CreateEvent/'
 import Dashboard from './components/Dashboard/'
+import EditEvent from './components/EditEvent'
 
 class App extends Component {
   render() {
@@ -30,6 +31,10 @@ class App extends Component {
               <Route exact
                 path={'/create-event'}
                 component={CreateEvent}
+              />
+              <Route exact
+                path={'/edit-event/:key'}
+                component={EditEvent}
               />
               <BottomNavigation />
             </div>

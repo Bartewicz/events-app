@@ -1,7 +1,8 @@
 import React from 'react'
 // React-Redux
 import { connect } from 'react-redux'
-import { deleteEventFromDB } from './reducer'
+import { Redirect } from 'react-router-dom'
+import { deleteEventFromDB } from '../Events/reducer'
 // UI
 import PaperRefined from '../../ui/PaperRefined'
 import EventCard from './EventCard'
@@ -10,7 +11,8 @@ import Dialog from '../Dialog'
 class Dashboard extends React.Component {
   state = {
     dialogContext: '',
-    dialogEvent: {}
+    dialogEvent: {},
+    eventToEdit: ''
   }
 
   eventActionHandler = (context, event) => {
@@ -25,14 +27,13 @@ class Dashboard extends React.Component {
     setTimeout(() => {
       dialog.classList.remove('active')
       dialog.classList.remove('hide')
-      this.setState({ dialogContext: '', dialogEvent: {} })
     }, 300)
   }
 
   completeRequest = (event) => {
     const context = this.state.dialogContext
     if (context === 'edit') {
-      alert('You try to edit this event\n' + this.state.dialogEvent.header)
+      this.setState({ eventToEdit: event.key })
       this.closeDialog()
     } else if (context === 'delete') {
       this.props.deleteEvent(event)
@@ -43,6 +44,9 @@ class Dashboard extends React.Component {
   }
 
   render() {
+    if (this.state.eventToEdit) {
+      return <Redirect to={`/edit-event/${this.state.eventToEdit}`} />
+    }
     return (
       <main>
         <div className={'paper'}>
