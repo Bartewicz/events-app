@@ -184,8 +184,12 @@
 
 .brand, .brand-follower {
   font-size: 1.5rem;
-  color: white;
+  color: white !important;
   padding: 6px;
+}
+
+.active > .brand, .active > .brand-follower {
+  color: white !important;
 }
 
 .brand-follower {

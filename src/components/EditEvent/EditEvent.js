@@ -26,7 +26,6 @@ class EditEvent extends React.Component {
 
   componentDidMount() {
     const event = this.props.events.filter(e => e.key === this.props.match.params.key)[0]
-    console.log(event)
     this.setState({ event })
   }
 
@@ -123,7 +122,7 @@ class EditEvent extends React.Component {
               <RaisedButton
                 className={'button-margins'}
                 fullWidth={true}
-                label={<b>Let's make it happen!</b>}
+                label={<b>Save changes!</b>}
                 onClick={this.props.onEventAdd}
                 primary={true}
               />

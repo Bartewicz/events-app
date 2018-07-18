@@ -18,28 +18,29 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Auth>
-          <Router>
-            <div>
-              <AppBar
-                pathname={this.props.match}
-              />
-              <Route exact strict
-                path={'/'}
-                component={Dashboard}
-              />
-              <Route exact
-                path={'/create-event'}
-                component={CreateEvent}
-              />
-              <Route exact
-                path={'/edit-event/:key'}
-                component={EditEvent}
-              />
-              <BottomNavigation />
-            </div>
-          </Router>
-        </Auth>
+        {
+          this.props.isUserLoggedIn ?
+            <Router>
+              <div>
+                <AppBar />
+                <Route exact strict
+                  path={'/'}
+                  component={Dashboard}
+                />
+                <Route exact
+                  path={'/create-event'}
+                  component={CreateEvent}
+                />
+                <Route exact
+                  path={'/edit-event/:key'}
+                  component={EditEvent}
+                />
+                <BottomNavigation />
+              </div>
+            </Router>
+            :
+            <Auth />
+        }
         <Snackbar
           className={'snackbar'}
           autoHideDuration={4000}
