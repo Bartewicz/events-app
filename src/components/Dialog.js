@@ -1,11 +1,16 @@
 import React from 'react'
+import Close from 'material-ui/svg-icons/content/clear'
 
 const Dialog = (props) => (
   <div id={'dialog'} className={'dialog'}>
     <div className={'dialog-background flex-center'}>
       <div className={'dialog-wrapper flex-center'}>
+        <Close
+          className={'align-flex-end close-button'}
+          onClick={props.onRequestClose}
+        />
         <p className={'dialog-content flex-center no-margin-bottom'}>
-          Do you want to {props.context} this event?
+          {`Do you want to ${props.context} this event?`}
         </p>
         <h3 className={'text-center'}>
           {props.event.header}
@@ -15,12 +20,12 @@ const Dialog = (props) => (
             className={'mx-05'}
             onClick={props.onRequestClose}
           >
-            Cancel
+            {`Cancel`}
           </button>
           <button
-            onClick={props.onRequestComplete}
+            onClick={() => props.onRequestComplete(props.event)}
           >
-            Yes
+            {`Yes`}
           </button>
         </div>
       </div>

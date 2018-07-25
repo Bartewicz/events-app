@@ -5,7 +5,7 @@ const CLEAR_PLACE = 'createEvent/CLEAR_PLACE'
 const SHOW_MARKER = 'createEvent/SHOW_MARKER'
 
 // Actions creators
-const setPlace = (location) => ({ type: SET_PLACE, location })
+export const setPlace = (location) => ({ type: SET_PLACE, location })
 export const clearPlace = () => ({ type: CLEAR_PLACE })
 export const showMarker = (markerPosition) => ({ type: SHOW_MARKER, markerPosition })
 
@@ -56,10 +56,14 @@ export const setPlaceOnMapClick = (location) => (dispatch, getState) => {
   })
 }
 
-export const setPlaceFromAutocomplete = (location) => (dispatch, getState) => {
-  dispatch(setPlace(location))
-  let lat = location.geometry.location.lat()
-  let lng = location.geometry.location.lng()
+export const setPlaceFromAutocomplete = (place) => (dispatch, getState) => {
+  dispatch(setPlace(place))
+  let lat = place.geometry.location.lat()
+  let lng = place.geometry.location.lng()
   let markerPosition = { lat, lng }
   dispatch(showMarker(markerPosition))
+}
+
+export const setPlaceFromEvent = (place) => (dispatch, getState) => {
+  dispatch(setPlace(place))
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 // Redux
 import { connect } from 'react-redux'
 // UI
@@ -8,13 +9,18 @@ import Nav from './Nav'
 const AppBar = (props) => (
   <div className={'appbar'}>
     <div>
-      <img className={'logo'} src={logo} alt={'Logo'} />
-      <span className={'brand'}>
-        Eve.nt
-      </span>
-      <span className={'brand-follower'}>
-        | Make it happen!
-      </span>
+      <NavLink exact
+        to={'/'}
+        className={'link'}
+      >
+        <img className={'logo'} src={logo} alt={'Logo'} />
+        <span className={'brand'}>
+          Eve.nt
+        </span>
+        <span className={'brand-follower'}>
+          | Make it happen!
+        </span>
+      </NavLink>
     </div>
     {
       props.isUserLoggedIn ?

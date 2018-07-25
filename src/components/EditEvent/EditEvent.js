@@ -8,7 +8,7 @@ import {
   onNewDescChange
 } from '../Events/reducer'
 // Components
-import Map from '../Map/CreateEventMap'
+import Map from '../Map/EditMap'
 // Logic
 import * as mapLogic from '../Map/logic'
 // Material-ui
@@ -17,7 +17,7 @@ import { TextField, RaisedButton } from 'material-ui'
 import SearchBox from '../Map/SearchBox'
 import DateAndTime from './DateAndTime'
 
-class CreateEvent extends React.Component {
+class EditEvent extends React.Component {
   state = {
     map: null,
     marker: null
@@ -28,7 +28,7 @@ class CreateEvent extends React.Component {
       <main>
         <div className={'paper'}>
           <h1 className={'text-center no-margins'}>
-            Create new event
+            {'Edit event: ' + this.props.newEventHeader}
           </h1>
         </div>
         <PaperRefined>
@@ -67,7 +67,10 @@ class CreateEvent extends React.Component {
                       </p>
                     </div>
                 }
-                <DateAndTime />
+                <DateAndTime
+                  defaultDate={this.props.newEventDate}
+                  defaultTime={this.props.newEventTime}
+                />
                 <h3 className={'section-title text-left no-margins'}>Title:</h3>
                 <TextField
                   fullWidth={true}
@@ -116,7 +119,7 @@ class CreateEvent extends React.Component {
               <RaisedButton
                 className={'button-margins'}
                 fullWidth={true}
-                label={<b>Let's make it happen!</b>}
+                label={<b>Save changes!</b>}
                 onClick={this.props.onEventAdd}
                 primary={true}
               />
@@ -130,9 +133,12 @@ class CreateEvent extends React.Component {
 
 export default connect(
   state => ({
+    events: state.events.events,
     user: state.auth.user,
     newEventHeader: state.events.newEventHeader,
     newEventDescription: state.events.newEventDescription,
+    newEventDate: state.events.newEventDate,
+    newEventTime: state.events.newEventTime,
     place: state.maps.place
   }),
   dispatch => ({
@@ -140,4 +146,4 @@ export default connect(
     onNewHeaderChange: (event, value) => dispatch(onNewHeaderChange(value)),
     onNewDescChange: (event, value) => dispatch(onNewDescChange(value))
   })
-)(CreateEvent)
+)(EditEvent)

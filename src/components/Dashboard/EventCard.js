@@ -1,7 +1,7 @@
 import React from 'react'
 // React-Redux
 import { connect } from 'react-redux'
-import { deleteEventFromDB } from './reducer'
+import { deleteEventFromDB } from '../Events/reducer'
 // Components
 import SingleEventMap from '../Map/SingleEventMap'
 // Moment
@@ -26,7 +26,10 @@ const EventCard = (props) => (
             Date:
           </p>
           <p className={'text-colorized no-margins'}>
-            {Moment(props.event.timestamp.date).format('ddd, Do MMM YYYY')}
+            {
+              Moment(JSON.parse(props.event.timestamp.date))
+                .format('ddd, Do MMM YYYY')
+            }
           </p>
         </div>
         {
@@ -42,7 +45,10 @@ const EventCard = (props) => (
                 Start:
                 </p>
               <p className={'text-colorized no-margins'}>
-                {Moment(props.event.timestamp.time, 'HH:mmZ').local().format('HH:mm')}
+                {
+                  Moment(JSON.parse(props.event.timestamp.time))
+                    .local().format('HH:mm')
+                }
               </p>
             </div>
         }

@@ -3,6 +3,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 // Reducer
 import { onDateChange, onTimeChange, toggleWholeDay } from '../Events/reducer'
+// Moment
+import Moment from 'moment'
 // Material ui
 import { DatePicker, TimePicker, Toggle } from 'material-ui'
 
@@ -26,6 +28,7 @@ const DateAndTime = (props) => (
     </div>
     <div className={'flex-space-between'}>
       <DatePicker
+        defaultDate={props.defaultDate}
         textFieldStyle={{
           cursor: 'pointer',
           marginRight: '10px',
@@ -39,6 +42,7 @@ const DateAndTime = (props) => (
         }}
       />
       <TimePicker
+        defaultTime={props.defaultTime}
         disabled={props.wholeDay}
         onChange={(event, value) => {
           props.onTimeChange(value)
@@ -59,6 +63,8 @@ const DateAndTime = (props) => (
 export default connect(
   state => ({
     wholeDay: state.events.wholeDay,
+    newEventDate: state.events.newEventDate,
+    newEventTime: state.events.newEventTime,
   }),
   dispatch => ({
     onDateChange: (value) => dispatch(onDateChange(value)),

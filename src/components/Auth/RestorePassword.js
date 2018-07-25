@@ -15,11 +15,12 @@ class RestorePassword extends React.Component {
 
   render() {
     return (
-      <div
-        className={'text-center'}
-      >
-        <h3>Type your email addres below to restore password:</h3>
+      <div className={'text-center'}>
+        <h3 className={'mb-05'}>
+          Type your email addres below to restore password:
+        </h3>
         <TextField
+          className={'mb-05'}
           fullWidth={true}
           hintText={'Type your email adress here'}
           inputStyle={{ color: '#0097A7' }}

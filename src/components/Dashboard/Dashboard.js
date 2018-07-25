@@ -1,6 +1,11 @@
 import React from 'react'
 // React-Redux
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+import {
+  setEventToEdit,
+  deleteEventFromDB
+} from '../Events/reducer'
 // UI
 import PaperRefined from '../../ui/PaperRefined'
 import EventCard from './EventCard'
@@ -9,7 +14,8 @@ import Dialog from '../Dialog'
 class Dashboard extends React.Component {
   state = {
     dialogContext: '',
-    dialogEvent: {}
+    dialogEvent: {},
+    eventToEdit: ''
   }
 
   eventActionHandler = (context, event) => {
@@ -24,24 +30,27 @@ class Dashboard extends React.Component {
     setTimeout(() => {
       dialog.classList.remove('active')
       dialog.classList.remove('hide')
-      this.setState({ dialogContext: '', dialogEvent: {} })
     }, 300)
   }
 
-  completeRequest = () => {
+  completeRequest = (event) => {
     const context = this.state.dialogContext
     if (context === 'edit') {
-        alert('You try to edit this event\n' + this.state.dialogEvent.header)
-        this.closeDialog()
+      this.setState({ eventToEdit: event.key })
+      this.props.setEventToEdit(event)
+      this.closeDialog()
     } else if (context === 'delete') {
-        alert('You try to delete this event\n' + this.state.dialogEvent.header)
-        this.closeDialog()
+      this.props.deleteEvent(event)
+      this.closeDialog()
     } else {
       alert('error')
     }
   }
 
   render() {
+    if (this.state.eventToEdit) {
+        return <Redirect to={`/edit-event/${this.state.eventToEdit}`} />
+    }
     return (
       <main>
         <div className={'paper'}>
@@ -63,7 +72,6 @@ class Dashboard extends React.Component {
                 )
                 :
                 'Loading events...'
-
             }
           </div>
         </PaperRefined>
@@ -85,5 +93,7 @@ export default connect(
     user: state.auth.user
   }),
   dispatch => ({
+    setEventToEdit: (event) => dispatch(setEventToEdit(event)),
+    deleteEvent: (event) => dispatch(deleteEventFromDB(event))
   })
 )(Dashboard)

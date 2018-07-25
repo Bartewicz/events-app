@@ -19,7 +19,7 @@ class LogInByMailAndPass extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className={'text-center mb-05'}>
         <TextField
           fullWidth={true}
           hintText={'Type your email adress here'}
@@ -48,7 +48,7 @@ class LogInByMailAndPass extends React.Component {
         />
         <span
           onClick={this.props.toggleRestorePassSection}
-          className={'auth-label'}
+          className={'auth-label mb-05'}
         >
           Forgot password?
         </span>
