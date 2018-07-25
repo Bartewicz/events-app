@@ -3,7 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import {
-  editEvent,
+  setEventToEdit,
   deleteEventFromDB
 } from '../Events/reducer'
 // UI
@@ -37,7 +37,7 @@ class Dashboard extends React.Component {
     const context = this.state.dialogContext
     if (context === 'edit') {
       this.setState({ eventToEdit: event.key })
-      this.props.editEvent(event)
+      this.props.setEventToEdit(event)
       this.closeDialog()
     } else if (context === 'delete') {
       this.props.deleteEvent(event)
@@ -93,7 +93,7 @@ export default connect(
     user: state.auth.user
   }),
   dispatch => ({
-    editEvent: (event) => dispatch(editEvent(event)),
+    setEventToEdit: (event) => dispatch(setEventToEdit(event)),
     deleteEvent: (event) => dispatch(deleteEventFromDB(event))
   })
 )(Dashboard)

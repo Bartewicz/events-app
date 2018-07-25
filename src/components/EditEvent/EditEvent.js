@@ -8,7 +8,7 @@ import {
   onNewDescChange
 } from '../Events/reducer'
 // Components
-import Map from '../Map/CreateEventMap'
+import Map from '../Map/EditMap'
 // Logic
 import * as mapLogic from '../Map/logic'
 // Material-ui

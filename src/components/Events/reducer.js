@@ -4,7 +4,7 @@ import { database } from '../../firebase'
 import Moment from 'moment'
 // Reducers
 import { handleSuccess, handleInternalError, handleExternalError } from '../Alerts/reducer'
-import { clearPlace } from '../Map/reducer'
+import { clearPlace, setPlace } from '../Map/reducer'
 
 // Actions types
 const SET_EVENTS = 'events/SET_EVENTS'
@@ -21,7 +21,7 @@ const NEW_DESC_CHANGE = 'events/NEW_DESC_CHANGE'
 const setEvents = (events) => ({ type: SET_EVENTS, events })
 const deleteEvent = () => ({ type: DELETE_EVENT })
 const createEvent = () => ({ type: CREATE_EVENT })
-export const editEvent = (event) => ({ type: EDIT_EVENT, event })
+const editEvent = (event) => ({ type: EDIT_EVENT, event })
 export const onDateChange = (value) => ({ type: NEW_DATE_CHANGE, value })
 export const onTimeChange = (value) => ({ type: NEW_TIME_CHANGE, value })
 export const toggleWholeDay = (value) => ({ type: TOGGLE_WHOLE_DAY, value })
@@ -119,6 +119,11 @@ export const deleteEventFromDB = (event) => (dispatch, getState) => {
     .catch((error) => {
       dispatch(handleExternalError(error))
     })
+}
+
+export const setEventToEdit = (event) => (dispatch, getState) => {
+  dispatch(setPlace(event.place))
+  dispatch(editEvent(event))
 }
 
 export const updateEventAtDB = (event) => (dispatch, getState) => {
