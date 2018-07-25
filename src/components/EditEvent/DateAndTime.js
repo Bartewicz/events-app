@@ -3,6 +3,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 // Reducer
 import { onDateChange, onTimeChange, toggleWholeDay } from '../Events/reducer'
+// Moment
+import Moment from 'moment'
 // Material ui
 import { DatePicker, TimePicker, Toggle } from 'material-ui'
 

@@ -3,7 +3,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 // Reducer
 import {
-  editEvent,
   addEventToFirebase,
   onNewHeaderChange,
   onNewDescChange
@@ -24,22 +23,12 @@ class EditEvent extends React.Component {
     marker: null
   }
 
-  componentDidMount() {
-    const event = this.props.events.filter(e => e.key === this.props.match.params.key)[0]
-    this.props.editEvent(event)
-  }
-
   render() {
     return (
       <main>
         <div className={'paper'}>
           <h1 className={'text-center no-margins'}>
-            Edit event: {
-              this.props.newEventHeader ?
-                this.props.newEventHeader
-                :
-                null
-            }
+            {'Edit event: ' + this.props.newEventHeader}
           </h1>
         </div>
         <PaperRefined>
@@ -78,7 +67,10 @@ class EditEvent extends React.Component {
                       </p>
                     </div>
                 }
-                <DateAndTime />
+                <DateAndTime
+                  defaultDate={this.props.newEventDate}
+                  defaultTime={this.props.newEventTime}
+                />
                 <h3 className={'section-title text-left no-margins'}>Title:</h3>
                 <TextField
                   fullWidth={true}
@@ -145,10 +137,11 @@ export default connect(
     user: state.auth.user,
     newEventHeader: state.events.newEventHeader,
     newEventDescription: state.events.newEventDescription,
+    newEventDate: state.events.newEventDate,
+    newEventTime: state.events.newEventTime,
     place: state.maps.place
   }),
   dispatch => ({
-    editEvent: (event) => dispatch(editEvent(event)),
     onEventAdd: () => dispatch(addEventToFirebase()),
     onNewHeaderChange: (event, value) => dispatch(onNewHeaderChange(value)),
     onNewDescChange: (event, value) => dispatch(onNewDescChange(value))

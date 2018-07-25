@@ -2,7 +2,10 @@ import React from 'react'
 // React-Redux
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { deleteEventFromDB } from '../Events/reducer'
+import {
+  editEvent,
+  deleteEventFromDB
+} from '../Events/reducer'
 // UI
 import PaperRefined from '../../ui/PaperRefined'
 import EventCard from './EventCard'
@@ -34,6 +37,7 @@ class Dashboard extends React.Component {
     const context = this.state.dialogContext
     if (context === 'edit') {
       this.setState({ eventToEdit: event.key })
+      this.props.editEvent(event)
       this.closeDialog()
     } else if (context === 'delete') {
       this.props.deleteEvent(event)
@@ -45,7 +49,7 @@ class Dashboard extends React.Component {
 
   render() {
     if (this.state.eventToEdit) {
-      return <Redirect to={`/edit-event/${this.state.eventToEdit}`} />
+        return <Redirect to={`/edit-event/${this.state.eventToEdit}`} />
     }
     return (
       <main>
@@ -58,7 +62,7 @@ class Dashboard extends React.Component {
           <div className={'dashboard'}>
             {
               this.props.events.length ?
-                this.props.events.map((event, index) =>
+                this.props.events.filter((e, i) => i >= this.props.events.length - 2).map((event, index) =>
                   <EventCard
                     event={event}
                     key={index}
@@ -89,6 +93,7 @@ export default connect(
     user: state.auth.user
   }),
   dispatch => ({
+    editEvent: (event) => dispatch(editEvent(event)),
     deleteEvent: (event) => dispatch(deleteEventFromDB(event))
   })
 )(Dashboard)

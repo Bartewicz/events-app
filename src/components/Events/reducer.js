@@ -56,18 +56,14 @@ export default (state = initialState, action) => {
     case DELETE_EVENT:
       return state
     case EDIT_EVENT:
-      const newEventDate = Moment(action.event.timestamp.date, 'YYYYMMDD').format('x').toUTCString()
-      const newEventTime = Moment(action.event.timestamp.time, 'HH:MMZ').format('x').toUTCString()
-      console.log(newEventDate)
-      console.log(newEventTime)
       return {
         ...state,
         createdAt: action.event.createdAt,
         createdBy: action.event.createdBy,
         newEventDescription: action.event.description,
         newEventHeader: action.event.header,
-        newEventDate,
-        newEventTime,
+        newEventDate: Moment(action.event.timestamp.date, 'YYYY-MM-DDTHH:mm:ss.SSSZ')._d,
+        newEventTime: Moment(action.event.timestamp.time, 'YYYY-MM-DDTHH:mm:ss.SSSZ')._d,
         wholeDay: action.event.wholeDay,
       }
     case TOGGLE_WHOLE_DAY:
@@ -76,13 +72,11 @@ export default (state = initialState, action) => {
         wholeDay: !action.value
       }
     case NEW_DATE_CHANGE:
-      console.log(action.value)
       return {
         ...state,
         newEventDate: action.value
       }
     case NEW_TIME_CHANGE:
-      console.log(action.value)
       return {
         ...state,
         newEventTime: action.value
@@ -186,9 +180,9 @@ export const addEventToFirebase = () => (dispatch, getState) => {
     dispatch(handleInternalError("You need to add a description!"))
   } else if (getState().events.newEventHeader.length >= 10 && getState().events.newEventDescription) {
     if (!getState().events.wholeDay && getState().events.newEventTime) {
-      timestamp.time = JSON.stringify(getState().events.newEventTime)
+      timestamp.time = getState().events.newEventTime
     }
-    timestamp.date = JSON.stringify(getState().events.newEventDate)
+    timestamp.date = getState().events.newEventDate
     console.log(timestamp.date)
     const newEvent = {
       createdAt,
