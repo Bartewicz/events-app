@@ -62,7 +62,7 @@ class Dashboard extends React.Component {
           <div className={'dashboard'}>
             {
               this.props.events.length ?
-                this.props.events.filter((e, i) => i >= this.props.events.length - 2).map((event, index) =>
+                this.props.events.map((event, index) =>
                   <EventCard
                     event={event}
                     key={index}
