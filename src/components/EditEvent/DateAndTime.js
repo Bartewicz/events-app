@@ -3,8 +3,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 // Reducer
 import { onDateChange, onTimeChange, toggleWholeDay } from '../Events/reducer'
-// Moment
-import Moment from 'moment'
 // Material ui
 import { DatePicker, TimePicker, Toggle } from 'material-ui'
 
@@ -42,7 +40,12 @@ const DateAndTime = (props) => (
         }}
       />
       <TimePicker
-        defaultTime={props.defaultTime}
+        defaultTime={
+          props.wholeDay ?
+            null
+            :
+            props.defaultTime
+        }
         disabled={props.wholeDay}
         onChange={(event, value) => {
           props.onTimeChange(value)

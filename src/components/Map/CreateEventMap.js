@@ -20,20 +20,6 @@ class Map extends React.Component {
     const marker = new window.google.maps.Marker({
       map: map
     })
-
-    // const service = new window.google.maps.places.PlacesService(map)
-
-    // service.getDetails({
-    //   placeId: "ChIJYUAVHhRXIkcRX-no9nruKFU"
-    // }, (place, status) => {
-    //   if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-    //     console.log('Your place, my lord', place)
-    //     console.log('lat', place.geometry.location.lat(), 'lng', place.geometry.location.lng() )
-    //     } else {
-    //       console.log(status)
-    //   }
-    // })
-
     map.addListener('click', (event) => {
       if (event) {
         let location = { lat: event.latLng.lat(), lng: event.latLng.lng() }

@@ -3,7 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 // Reducer
 import {
-  addEventToFirebase,
+  updateEventAtDB,
   onNewHeaderChange,
   onNewDescChange
 } from '../Events/reducer'
@@ -77,6 +77,7 @@ class EditEvent extends React.Component {
                   hintText={'Type a title of your event here'}
                   inputStyle={{ color: '#0097A7' }}
                   name={'new-event'}
+                  type={'text'}
                   onChange={this.props.onNewHeaderChange}
                   value={this.props.newEventHeader}
                 />
@@ -90,6 +91,7 @@ class EditEvent extends React.Component {
                   textareaStyle={{ color: '#0097A7' }}
                   multiLine={true}
                   name={'new-event'}
+                  type={'text'}
                   onChange={this.props.onNewDescChange}
                   value={this.props.newEventDescription}
                 />
@@ -120,7 +122,7 @@ class EditEvent extends React.Component {
                 className={'button-margins'}
                 fullWidth={true}
                 label={<b>Save changes!</b>}
-                onClick={this.props.onEventAdd}
+                onClick={this.props.onEventEdit}
                 primary={true}
               />
             </div>
@@ -142,7 +144,7 @@ export default connect(
     place: state.maps.place
   }),
   dispatch => ({
-    onEventAdd: () => dispatch(addEventToFirebase()),
+    onEventEdit: () => dispatch(updateEventAtDB()),
     onNewHeaderChange: (event, value) => dispatch(onNewHeaderChange(value)),
     onNewDescChange: (event, value) => dispatch(onNewDescChange(value))
   })

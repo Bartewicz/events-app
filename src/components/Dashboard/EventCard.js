@@ -17,7 +17,7 @@ const EventCard = (props) => (
     <div
       className={'single-event-wrapper'}
     >
-      <h3 className={'section-title no-margins align-center'}>
+      <h3 className={'section-title no-margins text-center'}>
         {props.event.header}
       </h3>
       <div className={'flex-space-between mb-05'}>
@@ -27,7 +27,11 @@ const EventCard = (props) => (
           </p>
           <p className={'text-colorized no-margins'}>
             {
-              Moment(JSON.parse(props.event.timestamp.date))
+              Moment(
+                JSON.parse(props.event.timestamp.date,
+                  'YYYY-MM-DDTHH:mm:ss.SSSZ'
+                )
+              )
                 .format('ddd, Do MMM YYYY')
             }
           </p>

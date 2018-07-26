@@ -26,8 +26,6 @@ class Map extends React.Component {
     service.getDetails(
       { placeId: this.props.place.place_id }, (place, status) => {
         if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-          console.log('Your place, my lord', place)
-          console.log('lat', place.geometry.location.lat(), 'lng', place.geometry.location.lng())
           let location = {
             lat: place.geometry.location.lat(),
             lng: place.geometry.location.lng()

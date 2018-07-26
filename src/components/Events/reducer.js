@@ -49,22 +49,19 @@ export default (state = initialState, action) => {
       }
     case CREATE_EVENT:
       return {
-        ...state,
-        newEventHeader: '',
-        newEventDescription: ''
+        state
       }
     case DELETE_EVENT:
       return state
     case EDIT_EVENT:
       return {
         ...state,
-        createdAt: action.event.createdAt,
-        createdBy: action.event.createdBy,
         newEventDescription: action.event.description,
         newEventHeader: action.event.header,
         newEventDate: Moment(action.event.timestamp.date, 'YYYY-MM-DDTHH:mm:ss.SSSZ')._d,
         newEventTime: Moment(action.event.timestamp.time, 'YYYY-MM-DDTHH:mm:ss.SSSZ')._d,
-        wholeDay: action.event.wholeDay,
+        wholeDay: action.event.timestamp.wholeDay,
+        eventKey: action.event.key
       }
     case TOGGLE_WHOLE_DAY:
       return {
@@ -126,12 +123,52 @@ export const setEventToEdit = (event) => (dispatch, getState) => {
   dispatch(editEvent(event))
 }
 
-export const updateEventAtDB = (event) => (dispatch, getState) => {
-  // database.ref(`/events/${event.key}`)
-  //   .update(() => {
-  //     dispatch(editEvent())
-  //   })
-  dispatch(handleSuccess(`You succesfully edited event ${event.key}`))
+export const updateEventAtDB = () => (dispatch, getState) => {
+  const description =
+    String(getState().events.newEventDescription.charAt(0).toUpperCase()) +
+    String(getState().events.newEventDescription.substr(1))
+  const header =
+    String(getState().events.newEventHeader.charAt(0).toUpperCase()) +
+    String(getState().events.newEventHeader.substr(1))
+  const timestamp = {
+    date: JSON.stringify(getState().events.newEventDate),
+    wholeDay: getState().events.wholeDay
+  }
+  const place = {
+    location: {
+      lat: getState().maps.place.geometry.location.lat(),
+      lng: getState().maps.place.geometry.location.lng()
+    },
+    formatted_address: getState().maps.place.formatted_address,
+    place_id: getState().maps.place.place_id
+  }
+  if (getState().maps.place.name) {
+    place.name = getState().maps.place.name
+  }
+  if (!header) {
+    dispatch(handleInternalError('You need to add a title. Remember:\nYour title must be at least 10 characters long.'))
+  } else if (header.length < 10) {
+    dispatch(handleInternalError('Your title must be at least 10 characters long.'))
+  } else if (!description) {
+    dispatch(handleInternalError("You need to add a description!"))
+  } else if (description.length < 30) {
+    dispatch(handleInternalError("Your decsription must be\nat least 30 characters long."))
+  } else {
+    if (!getState().events.wholeDay && getState().events.newEventTime) {
+      timestamp.time = JSON.stringify(getState().events.newEventTime)
+    }
+    database.ref(`/events/${getState().events.eventKey}`)
+      .update({
+        description,
+        header,
+        timestamp,
+        place
+      })
+      .then(() => dispatch(createEvent()))
+      .then(() => dispatch(clearPlace()))
+      .then(dispatch(handleSuccess(`Your event was updated.`)))
+      .catch(error => dispatch(handleExternalError(error)))
+  }
 }
 
 export const addEventToFirebase = () => (dispatch, getState) => {
@@ -169,7 +206,7 @@ export const addEventToFirebase = () => (dispatch, getState) => {
   }
   if (!getState().events.newEventDate) {
     dispatch(handleInternalError("Specify a date first."))
-  } else if (!getState().events.wholeDay && !getState().events.newEventTime) {
+  } else if (!timestamp.wholeDay && !getState().events.newEventTime) {
     dispatch(handleInternalError("Specify a time or mark as a whole day."))
   } else if (!Moment(getState().events.newEventDate, 'YYYYMMDD').isValid()) {
     dispatch(handleInternalError("A date is invalid.\nCorrect date and try again."))
@@ -183,12 +220,13 @@ export const addEventToFirebase = () => (dispatch, getState) => {
     dispatch(handleInternalError('Your title must be at least 10 characters long.'))
   } else if (!description) {
     dispatch(handleInternalError("You need to add a description!"))
-  } else if (getState().events.newEventHeader.length >= 10 && getState().events.newEventDescription) {
+  } else if (description.length < 30) {
+    dispatch(handleInternalError("Your decsription must be\nat least 30 characters long."))
+  } else {
     if (!getState().events.wholeDay && getState().events.newEventTime) {
-      timestamp.time = getState().events.newEventTime
+      timestamp.time = JSON.stringify(getState().events.newEventTime)
     }
-    timestamp.date = getState().events.newEventDate
-    console.log(timestamp.date)
+    timestamp.date = JSON.stringify(getState().events.newEventDate)
     const newEvent = {
       createdAt,
       createdBy,
@@ -197,7 +235,6 @@ export const addEventToFirebase = () => (dispatch, getState) => {
       place,
       timestamp
     }
-    console.log(newEvent.timestamp.date)
     const newEventKey = database.ref(`/events`).push().key
     database.ref(`/events/${newEventKey}`)
       .set(newEvent)
@@ -205,7 +242,5 @@ export const addEventToFirebase = () => (dispatch, getState) => {
       .then(() => dispatch(clearPlace()))
       .then(() => dispatch(handleSuccess('Great! Your event was succesfully created!')))
       .catch(error => dispatch(handleExternalError(error)))
-  } else {
-    dispatch(handleInternalError('Something went wrong...'))
   }
 }

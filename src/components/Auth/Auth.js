@@ -3,13 +3,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { logInByGoogle } from './reducer'
 // Components
-import AppBar from '../AppBar'
 import LogInByGoogle from './LogInByGoogle'
 import RestorePassword from './RestorePassword'
 import CreateUser from './CreateUser'
 // UI
 import logoBig from '../../img/logo-big.gif'
-import PaperRefined from '../../ui/PaperRefined'
 import LogInByMailAndPass from './LogInByMailAndPass'
 import QuestionAnswer from 'material-ui/svg-icons/action/help-outline'
 
